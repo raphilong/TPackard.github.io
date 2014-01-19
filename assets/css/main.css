@@ -1,7 +1,13 @@
 @charset "UTF-8";
 
+@font-face {
+	font-family: 'Light';
+	src: url("/assets/fonts/HelveticaNeue-Thin.ttf") format("truetype");
+}
+
 html {
 	height: 100%;
+	font-family: 'Light';
 }
 
 body {
@@ -13,7 +19,6 @@ body {
 header {
 	float: top;
 	text-align: center;
-	font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue';
 	font-weight: 700;
 	font-size: 68px;
 	color: #888888;
@@ -22,36 +27,27 @@ header {
 a.sidebar:link {
 	color:#888888;
 	text-decoration:none;
-	font-family: HelveticaNeue-Light, Helvetica Neue Light;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue";
-	font-weight: 100;
+	font-weight: 400;
 }
 a.sidebar:visited {
 	color:#888888;
 	text-decoration:none;
-	font-family: HelveticaNeue-Light, Helvetica Neue Light;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue";
-	font-weight: 100;
+	font-weight: 400;
 }
 a.sidebar:hover {
 	color:#0090FF;
 	text-decoration:none;
-	font-family: HelveticaNeue-Light, Helvetica Neue Light;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue";
-	font-weight: 100;
+	font-weight: 400;
 }
 a.sidebar:active {
 	color:#888888;
 	text-decoration:none;
-	font-family: HelveticaNeue-Light, Helvetica Neue Light;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue";
-	font-weight: 100;
+	font-weight: 400;
 }
 
 sidebar {
 	float: left;
 	text-align: left;
-	font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue';
 	font-size: 24px;
 	color: #888888;
 	width: 150px;
@@ -62,9 +58,7 @@ sidebar {
 a.content:link {
 	color:#0090FF;
 	text-decoration:none;
-	font-family: HelveticaNeue-Light, Helvetica Neue Light;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue";
-	font-weight: 100;
+	font-weight: 400;
 	background-color: #E3E3E3;
 	border: 2px solid #E3E3E3;
 	border-bottom-width: 2px;
@@ -76,9 +70,7 @@ a.content:link {
 a.content:visited {
 	color:#0090FF;
 	text-decoration:none;
-	font-family: HelveticaNeue-Light, Helvetica Neue Light;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue";
-	font-weight: 100;
+	font-weight: 400;
 	background-color: #E3E3E3;
 	border: 2px solid #E3E3E3;
 	border-bottom-width: 2px;
@@ -90,9 +82,7 @@ a.content:visited {
 a.content:hover {
 	color:#0090FF;
 	text-decoration:none;
-	font-family: HelveticaNeue-Light, Helvetica Neue Light;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue";
-	font-weight: 100;
+	font-weight: 400;
 	background-color: #EEEEEE;
 	border: 2px solid #EEEEEE;
 	border-bottom-width: 2px;
@@ -104,9 +94,7 @@ a.content:hover {
 a.content:active {
 	color:#FFFFFF;
 	text-decoration:none;
-	font-family: HelveticaNeue-Light, Helvetica Neue Light;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue";
-	font-weight: 100;
+	font-weight: 400;
 	background-color: #0090FF;
 	border: 2px solid #0090FF;
 	border-bottom-width: 2px;
@@ -119,7 +107,6 @@ a.content:active {
 content {
 	width: 50%;
 	text-align: justify;
-	font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue';
 	color: #888888;
 	margin-right: 5%;
 	line-height: 130%;
