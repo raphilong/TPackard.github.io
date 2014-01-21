@@ -1,4 +1,0 @@
-Personal Website
-==================
-
-Nothing more
