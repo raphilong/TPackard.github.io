@@ -70,7 +70,7 @@ a.content:link {
 	border-top-width: 1px;
 	border-left-width: 3px;
 	border-right-width: 3px;
-	border-radius: 6px;
+	border-radius: 0px;
 }
 a.content:visited {
 	color:#0090FF;
@@ -82,7 +82,7 @@ a.content:visited {
 	border-top-width: 1px;
 	border-left-width: 3px;
 	border-right-width: 3px;
-	border-radius: 6px;
+	border-radius: 0px;
 }
 a.content:hover {
 	color:#0090FF;
@@ -94,7 +94,7 @@ a.content:hover {
 	border-top-width: 1px;
 	border-left-width: 3px;
 	border-right-width: 3px;
-	border-radius: 6px;
+	border-radius: 0px;
 }
 a.content:active {
 	color:#FFFFFF;
@@ -106,7 +106,7 @@ a.content:active {
 	border-top-width: 1px;
 	border-left-width: 3px;
 	border-right-width: 3px;
-	border-radius: 6px;
+	border-radius: 0px;
 }
 
 content {
