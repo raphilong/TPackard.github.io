@@ -2,7 +2,7 @@
 
 @font-face {
 	font-family: 'Light';
-	src: url("./assets/fonts/HelveticaNeue-Light.ttf") format("truetype");
+	src: url("/assets/fonts/HelveticaNeue-Light.ttf") format("truetype");
 }
 
 html {
