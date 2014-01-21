@@ -71,6 +71,11 @@ a.content:link {
 	border-left-width: 3px;
 	border-right-width: 3px;
 	border-radius: 0px;
+	-o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+	transition:.5s;
 }
 a.content:visited {
 	color:#0090FF;
@@ -83,6 +88,11 @@ a.content:visited {
 	border-left-width: 3px;
 	border-right-width: 3px;
 	border-radius: 0px;
+	-o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+	transition:.5s;
 }
 a.content:hover {
 	color:#0090FF;
@@ -95,6 +105,11 @@ a.content:hover {
 	border-left-width: 3px;
 	border-right-width: 3px;
 	border-radius: 0px;
+	-o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+	transition:.5s;
 }
 a.content:active {
 	color:#FFFFFF;
@@ -107,6 +122,11 @@ a.content:active {
 	border-left-width: 3px;
 	border-right-width: 3px;
 	border-radius: 0px;
+	-o-transition: color .4s ease-out, background-color .6s ease-in;
+	-ms-transition: color .4s ease-out, background-color .6s ease-in;
+	-moz-transition: color .4s ease-out, background-color .6s ease-in;
+	-webkit-transition: color .4s ease-out, background-color .6s ease-in;
+	transition: color .4s ease-out, background-color .6s ease-in;
 }
 
 content {
