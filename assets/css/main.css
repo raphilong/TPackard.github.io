@@ -10,6 +10,11 @@
 	src: url("/assets/fonts/HelveticaNeue.ttf") format("truetype");
 }
 
+@font-face {
+	font-family: 'UltraLight';
+	src: url("/assets/fonts/HelveticaNeue-UltraLight.ttf") format("truetype");
+}
+
 html {
 	height: 100%;
 	font-family: 'Light';
@@ -27,6 +32,10 @@ header {
 	text-align: center;
 	font-size: 68px;
 	color: #888888;
+}
+
+.Ultra-Light {
+	font-family: 'UltraLight';
 }
 
 a.sidebar:link {
