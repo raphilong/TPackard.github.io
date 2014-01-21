@@ -122,11 +122,11 @@ a.content:active {
 	border-left-width: 3px;
 	border-right-width: 3px;
 	border-radius: 0px;
-	-o-transition: color .4s ease-out, background-color .6s ease-in;
-	-ms-transition: color .4s ease-out, background-color .6s ease-in;
-	-moz-transition: color .4s ease-out, background-color .6s ease-in;
-	-webkit-transition: color .4s ease-out, background-color .6s ease-in;
-	transition: color .4s ease-out, background-color .6s ease-in;
+	-o-transition: color .4s ease-out, background-color .6s ease-in, border-color .6s ease-in;
+	-ms-transition: color .4s ease-out, background-color .6s ease-in, border-color .6s ease-in;
+	-moz-transition: color .4s ease-out, background-color .6s ease-in, border-color .6s ease-in;
+	-webkit-transition: color .4s ease-out, background-color .6s ease-in, border-color .6s ease-in;
+	transition: color .4s ease-out, background-color .6s ease-in, border-color .6s ease-in;
 }
 
 content {
