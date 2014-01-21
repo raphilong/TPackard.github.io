@@ -7,7 +7,7 @@
 
 @font-face {
 	font-family: 'Medium';
-	src: url("/assets/fonts/HelveticaNeue-Medium.ttf") format("truetype");
+	src: url("/assets/fonts/HelveticaNeue.ttf") format("truetype");
 }
 
 html {
@@ -25,7 +25,6 @@ header {
 	font-family: 'Medium';
 	float: top;
 	text-align: center;
-	font-weight: 700;
 	font-size: 68px;
 	color: #888888;
 }
