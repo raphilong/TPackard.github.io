@@ -24,7 +24,7 @@ body {
 	margin: 0;
 	padding: 0cm 3cm;
 	height: 100%;
-	background-color: #000000;
+	background-color: #002B36;
 }
 
 header {
@@ -74,7 +74,7 @@ sidebar {
 	float: left;
 	text-align: left;
 	font-size: 24px;
-	color: #FFFFFF;
+	color: #00FF90;
 	width: 150px;
 	text-align: left;
 	height: 100%;
@@ -158,9 +158,5 @@ content {
 }
 
 h2 {
-	color:#0090FF;
-}
-
-li {
 	color:#0090FF;
 }

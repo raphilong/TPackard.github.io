@@ -10,3 +10,5 @@ function setCSS() {
        document.write("<link rel='stylesheet' href='/assets/css/dark.css' type='text/css'>");
       }
 }
+
+setCSS();
