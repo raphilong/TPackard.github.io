@@ -35,10 +35,14 @@ header {
 
 subheader {
 	font-family: 'UltraLight';
+	float: center;
 	text-align: center;
 	font-size: 10px;
-	letter-spacing: 100px;
 	color: #888888;
+}
+
+span.spread {
+	letter-spacing: 120px;
 }
 
 .Ultra-Light {
