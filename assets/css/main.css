@@ -27,10 +27,17 @@ body {
 }
 
 header {
-	font-family: 'Light';
 	float: top;
 	text-align: center;
 	font-size: 68px;
+	color: #888888;
+}
+
+subheader {
+	font-family: 'UltraLight';
+	text-align: center;
+	font-size: 10px;
+	letter-spacing: 100px;
 	color: #888888;
 }
 
