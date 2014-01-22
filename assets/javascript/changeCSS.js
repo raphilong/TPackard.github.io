@@ -1,4 +1,4 @@
-function getStylesheet() {
+function setCSS() {
       var currentTime = new Date().getHours();
       if (0 <= currentTime && currentTime <= 5) {
        document.write("<link rel='stylesheet' href='/assets/css/dark.css' type='text/css'>");
