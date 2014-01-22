@@ -24,21 +24,21 @@ body {
 	margin: 0;
 	padding: 0cm 3cm;
 	height: 100%;
-	background-color: #002B36;
+	background-color: #001824;
 }
 
 header {
 	float: top;
 	text-align: center;
 	font-size: 68px;
-	color: #FFFFFF;
+	color: #BED2E6;
 }
 
 subheader {
 	font-family: 'UltraLight';
 	text-align: center;
 	font-size: 10px;
-	color: #FFFFFF;
+	color: #BED2E6;
 }
 
 span.spread {
@@ -50,22 +50,37 @@ span.spread {
 }
 
 a.sidebar:link {
-	color:#FFFFFF;
+	color:#BED2E6;
 	text-decoration:none;
 	font-weight: 400;
+    -o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+	transition:.5s;
 }
 a.sidebar:visited {
-	color:#FFFFFF;
+	color:#BED2E6;
 	text-decoration:none;
 	font-weight: 400;
+    -o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+	transition:.5s;
 }
 a.sidebar:hover {
-	color:#00FF90;
+	color:#00FFB3;
 	text-decoration:none;
 	font-weight: 400;
+    -o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+	transition:.5s;
 }
 a.sidebar:active {
-	color:#FFFFFF;
+	color:#00B37D;
 	text-decoration:none;
 	font-weight: 400;
 }
@@ -74,18 +89,18 @@ sidebar {
 	float: left;
 	text-align: left;
 	font-size: 24px;
-	color: #00FF90;
+	color: #00FFB3;
 	width: 150px;
 	text-align: left;
 	height: 100%;
 }
 
 a.content:link {
-	color:#0090FF;
+	color:#00FFB3;
 	text-decoration:none;
 	font-weight: 400;
-	background-color: #E4E4E4;
-	border: 2px solid #E4E4E4;
+	background-color: #1E2D3C;
+	border: 2px solid #1E2D3C;
 	border-bottom-width: 2px;
 	border-top-width: 1px;
 	border-left-width: 3px;
@@ -98,11 +113,11 @@ a.content:link {
 	transition:.5s;
 }
 a.content:visited {
-	color:#0090FF;
+	color:#00FFB3;
 	text-decoration:none;
 	font-weight: 400;
-	background-color: #E4E4E4;
-	border: 2px solid #E4E4E4;
+	background-color: #1E2D3C;
+	border: 2px solid #1E2D3C;
 	border-bottom-width: 2px;
 	border-top-width: 1px;
 	border-left-width: 3px;
@@ -115,11 +130,11 @@ a.content:visited {
 	transition:.5s;
 }
 a.content:hover {
-	color:#0090FF;
+	color:#00FFB3;
 	text-decoration:none;
 	font-weight: 400;
-	background-color: #EEEEEE;
-	border: 2px solid #EEEEEE;
+	background-color: #142332;
+	border: 2px solid #142332;
 	border-bottom-width: 2px;
 	border-top-width: 1px;
 	border-left-width: 3px;
@@ -132,11 +147,11 @@ a.content:hover {
 	transition:.5s;
 }
 a.content:active {
-	color:#FFFFFF;
+	color:#001824;
 	text-decoration:none;
 	font-weight: 400;
-	background-color: #0090FF;
-	border: 2px solid #0090FF;
+	background-color: #00FFB3;
+	border: 2px solid #00FFB3;
 	border-bottom-width: 2px;
 	border-top-width: 1px;
 	border-left-width: 3px;
@@ -152,11 +167,11 @@ a.content:active {
 content {
 	width: 50%;
 	text-align: justify;
-	color: #FFFFFF;
+	color: #BED2E6;
 	margin-right: 5%;
 	line-height: 130%;
 }
 
 h2 {
-	color:#0090FF;
+	color:#00FFB3;
 }

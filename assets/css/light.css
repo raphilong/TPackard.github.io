@@ -52,19 +52,34 @@ a.sidebar:link {
 	color:#888888;
 	text-decoration:none;
 	font-weight: 400;
+	-o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+	transition:.5s;
 }
 a.sidebar:visited {
 	color:#888888;
 	text-decoration:none;
 	font-weight: 400;
+	-o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+	transition:.5s;
 }
 a.sidebar:hover {
 	color:#0090FF;
 	text-decoration:none;
 	font-weight: 400;
+	-o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+	transition:.5s;
 }
 a.sidebar:active {
-	color:#888888;
+	color:#0074CC;
 	text-decoration:none;
 	font-weight: 400;
 }
