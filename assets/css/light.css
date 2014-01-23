@@ -82,6 +82,13 @@ a.sidebar:active {
 	color:#0074CC;
 	text-decoration:none;
 	font-weight: 400;
+	border: 0px solid #EEEEEE;
+	border-bottom-width: 2px;
+	-o-transition:.2s;
+	-ms-transition:.2s;
+	-moz-transition:.2s;
+	-webkit-transition:.2s;
+	transition:.2s;
 }
 
 sidebar {
@@ -104,7 +111,6 @@ a.content:link {
 	border-top-width: 1px;
 	border-left-width: 3px;
 	border-right-width: 3px;
-	border-radius: 0px;
 	-o-transition:.5s;
 	-ms-transition:.5s;
 	-moz-transition:.5s;
@@ -121,7 +127,6 @@ a.content:visited {
 	border-top-width: 1px;
 	border-left-width: 3px;
 	border-right-width: 3px;
-	border-radius: 0px;
 	-o-transition:.5s;
 	-ms-transition:.5s;
 	-moz-transition:.5s;
@@ -138,7 +143,6 @@ a.content:hover {
 	border-top-width: 1px;
 	border-left-width: 3px;
 	border-right-width: 3px;
-	border-radius: 0px;
 	-o-transition:.5s;
 	-ms-transition:.5s;
 	-moz-transition:.5s;
@@ -155,7 +159,6 @@ a.content:active {
 	border-top-width: 1px;
 	border-left-width: 3px;
 	border-right-width: 3px;
-	border-radius: 0px;
 	-o-transition: color .4s ease-out, background-color .6s ease-in, border-color .6s ease-in;
 	-ms-transition: color .4s ease-out, background-color .6s ease-in, border-color .6s ease-in;
 	-moz-transition: color .4s ease-out, background-color .6s ease-in, border-color .6s ease-in;

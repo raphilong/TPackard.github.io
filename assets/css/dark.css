@@ -83,12 +83,8 @@ a.sidebar:active {
 	color:#00FFB3;
 	text-decoration:none;
 	font-weight: 400;
-	background-color: #142332;
-	border: 2px solid #142332;
+	border: 0px solid #142332;
 	border-bottom-width: 2px;
-	border-top-width: 1px;
-	border-left-width: 3px;
-	border-right-width: 3px;
 	-o-transition:.2s;
 	-ms-transition:.2s;
 	-moz-transition:.2s;
