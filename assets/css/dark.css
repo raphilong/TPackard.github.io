@@ -31,14 +31,14 @@ header {
 	float: top;
 	text-align: center;
 	font-size: 68px;
-	color: #BED2E6;
+	color: #D2D2D2;
 }
 
 subheader {
 	font-family: 'UltraLight';
 	text-align: center;
 	font-size: 10px;
-	color: #BED2E6;
+	color: #D2D2D2;
 }
 
 span.spread {
@@ -50,7 +50,7 @@ span.spread {
 }
 
 a.sidebar:link {
-	color:#BED2E6;
+	color:#D2D2D2;
 	text-decoration:none;
 	font-weight: 400;
     -o-transition:.5s;
@@ -60,7 +60,7 @@ a.sidebar:link {
 	transition:.5s;
 }
 a.sidebar:visited {
-	color:#BED2E6;
+	color:#D2D2D2;
 	text-decoration:none;
 	font-weight: 400;
     -o-transition:.5s;
@@ -167,7 +167,7 @@ a.content:active {
 content {
 	width: 50%;
 	text-align: justify;
-	color: #BED2E6;
+	color: #D2D2D2;
 	margin-right: 5%;
 	line-height: 130%;
 }
