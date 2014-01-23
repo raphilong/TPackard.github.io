@@ -2,17 +2,17 @@
 
 @font-face {
 	font-family: 'Light';
-	src: url("/assets/fonts/HelveticaNeue-Light.ttf") format("truetype");
+	src: url("/fonts/HelveticaNeue-Light.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: 'Medium';
-	src: url("/assets/fonts/HelveticaNeue.ttf") format("truetype");
+	src: url("/fonts/HelveticaNeue.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: 'UltraLight';
-	src: url("/assets/fonts/HelveticaNeue-UltraLight.ttf") format("truetype");
+	src: url("/fonts/HelveticaNeue-UltraLight.ttf") format("truetype");
 }
 
 html {

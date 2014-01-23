@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<jnlp codebase="" href="">
+		<information>
+			<title>Java Web Start Test</title>
+			<vendor>Meeeee</vendor>
+			<description>long</description>
+			<description kind="short">short</description>
+			<offline-allowed/>
+		</information>
+		<resources>
+			<j2se version="1.7"/>
+			<jar href="/Pathfinder/Pathfinder.jar"/>
+		</resources>
+		<application-desc main-class="Main"/>
+	</jnlp>
