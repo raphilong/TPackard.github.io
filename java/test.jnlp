@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<jnlp codebase="" href="">
+	<jnlp codebase="http://tylerpackard.com/java/" href="test.jnlp">
 		<information>
 			<title>Java Web Start Test</title>
-			<vendor>Meeeee</vendor>
-			<description>long</description>
-			<description kind="short">short</description>
+			<vendor>Tyler Packard</vendor>
+			<description>A test with JAWS</description>
+			<description kind="short">JAWS Test</description>
 			<offline-allowed/>
 		</information>
 		<resources>
