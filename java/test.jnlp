@@ -11,5 +11,5 @@
 			<j2se version="1.7"/>
 			<jar href="/java/Pathfinder/Pathfinder.jar"/>
 		</resources>
-		<application-desc main-class="com.tylerpackard.Main"/>
+		<application-desc main-class="levin.main.Main"/>
 	</jnlp>
