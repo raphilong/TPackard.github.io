@@ -9,7 +9,7 @@
 		</information>
 		<resources>
 			<j2se version="1.7"/>
-			<jar href="/Pathfinder/Pathfinder.jar"/>
+			<jar href="/java/Pathfinder/Pathfinder.jar"/>
 		</resources>
 		<application-desc main-class="Main"/>
 	</jnlp>
