@@ -13,6 +13,3 @@ if (17 < currentTime&&currentTime < 23) {
 	waitTime = (6 - currentTime) * 60 * 60 * 1000;
 }
 console.log(waitTime);
-setTimeout(function(){
-   window.location.reload(1);
-}, waitTime);
