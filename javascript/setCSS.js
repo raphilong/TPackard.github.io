@@ -10,6 +10,6 @@ if (5 < currentTime&&currentTime <= 17) {
 }
 if (17 < currentTime&&currentTime <= 24) {
 	document.write("<link rel='stylesheet' href='/css/dark.css' type='text/css'>");
-	waitTime = (6 - currentTime) * 60 * 60 * 1000;
+	waitTime = (12 - currentTime) * 60 * 60 * 1000;
 }
 console.log(waitTime);
