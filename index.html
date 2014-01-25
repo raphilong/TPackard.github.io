@@ -9,26 +9,28 @@
 		<meta name="author" content="Tyler Packard">
 		<meta name="designer" content="Tyler Packard">
 		<meta charset="UTF-8">
+		<meta http-equiv="refresh" content="900"> <!--Reload every 15 mins-->
 		<link rel="shortcut icon" href="/images/favicon.ico"/>
 		<script src="/javascript/analytics.js"></script>
 		<script src="/javascript/setCSS.js"></script>
 		<noscript><link href="/css/light.css" rel="stylesheet" type="text/css"></noscript>
+		<link href="/css/grid.css" rel="stylesheet" type="text/css">
 	</head>
 	
 	<body>
-		<p>
-		<header>TYLER<span class="Ultra-Light">PACKARD</span></header>
-		<center><subheader><span class="spread">帕泰</span>乐</subheader></center>
-		<sidebar>
-			<ul style="list-style-type: none; padding-left:0;">
-				<li>Home</li>
-				<br>
-				<li><a href="/java" class="sidebar">Java</a></li>
-			</ul>
-		</sidebar>
-		<br><br>
-		<content>
-			Hello, I'm you.
-		</content>
+		<div class="grid">
+			<div class="node-8">
+				<header>TYLER<span class="Ultra-Light">PACKARD</span></header>
+				<center><subheader><span class="spread">帕泰</span>乐</subheader></center>
+			</div>
+			<div class="node-1 sidebar">
+				Home
+				<br><br>
+				<a href="/java" class="sidebar">Java</a>
+			</div>
+			<div class="node-7 content">
+				Hello, I'm you.
+			</div>
+		</div>
 	</body>
 </html>

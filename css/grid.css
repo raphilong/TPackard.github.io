@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.grid:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+[class*='node-'] {
+  float: left;
+  padding: 10px;
+}
+
+[class*='node-']:last-of-type {
+  padding-right: 10px;
+  float: right;
+}
+
+.node-8	{width: 100%;}
+.node-7	{width: 87.5%;}
+.node-6	{width: 75%;}
+.node-5	{width: 62.5%;}
+.node-4	{width: 50%;}
+.node-3	{width: 37.5%;}
+.node-2	{width: 25%;}
+.node-1	{width: 12.5%;}
