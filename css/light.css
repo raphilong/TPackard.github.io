@@ -192,7 +192,15 @@ li {
 
 img[src$=".gif"], img[src$=".png"] {
 	image-rendering: -moz-crisp-edges;
-	image-rendering:   -o-crisp-edges;
-	image-rendering: -webkit-optimize-contrast;
+	image-rendering: -o-crisp-edges;
 	image-rendering: crisp-edges;
+    image-rendering: -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+a.menuReveal {
+    position: fixed;
+    color: #888888;
+    top: 42%;
+    left: 25px;
 }
