@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Javascript Tests</title>
+    </head>
+    
+    <body>
+        <center><canvas id = "canvas" style = "image-rendering: -moz-crisp-edges;
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: -o-crisp-edges;
+                image-rendering: optimize-contrast;">
+        </canvas></center>
+        <script>
+            var canvas = document.getElementById("canvas");
+            canvas.width = 800;
+            canvas.height = 500;
+            var ctx = canvas.getContext("2d");
+                        
+            function loadImage(imgSrc) {
+                var tempImage = new Image();
+                tempImage.src = imgSrc;
+                return tempImage;
+            }
+            
+            function entity() {
+                var numArgs = arguments.length;
+                this.rightImage = loadImage(arguments[0] + "Right.png");
+                this.leftImage = loadImage(arguments[0] + "Left.png");
+                
+                if (numArgs >= 2) this.x = arguments[1];
+                else this.x = 0;
+                
+                if (numArgs >= 3) this.y = arguments[2];
+                else this.y = 0;
+                
+                if (numArgs >= 4) this.speed = arguments[3];
+                else this.speed = 1;
+                
+                if (numArgs >= 5) this.width = arguments[4];
+                else this.width = this.image.width;
+                
+                if (numArgs >= 6) this.height = arguments[5];
+                else this.height = this.image.height;
+                
+                if (numArgs >= 7) this.numFrames = arguments[6];
+                else this.numFrames = 1;
+                
+                if (numArgs >=8) this.numAnim = arguments[7];
+                else this.numAnim = 1;
+                
+                this.currentFrame = 0;
+                this.facingRight = false;
+                this.moving = false;
+            }
+            
+            entity.prototype.nextFrame = function() {
+                this.currentFrame++;
+                if (this.currentFrame >= this.numFrames) this.currentFrame = 0;
+            }
+            
+            var person = new entity("Person ", 0, 0, 200, 13, 32, 6);
+            
+            var keysDown = {};
+            
+            document.addEventListener("keydown", function (e) {
+                keysDown[e.keyCode] = true;
+            }, false);
+
+            document.addEventListener("keyup", function (e) {
+                delete keysDown[e.keyCode];
+            }, false);
+            
+            var update = function(delta) {
+                person.moving = false;
+                if (38 in keysDown) { // Up
+                    person.y -= Math.round(person.speed * delta);
+                    person.moving = true;
+                }
+                if (40 in keysDown) { // Down
+                    person.y += Math.round(person.speed * delta);
+                    person.moving = true;
+                }
+                if (37 in keysDown) { // Left
+                    person.x -= Math.round(person.speed * delta);
+                    person.moving = true;
+                    person.facingRight = false;
+                }
+                if (39 in keysDown) { // Right
+                    person.x += Math.round(person.speed * delta);
+                    person.moving = true;
+                    person.facingRight = true;
+                }
+            };
+            
+            var paint = function() {
+                ctx.fillStyle = "#EEEEEE";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                var image = person.facingRight ? person.rightImage : person.leftImage;
+                ctx.drawImage(image, (person.currentFrame * person.width + person.currentFrame), 0, person.width, person.height, person.x, person.y, person.width, person.height);
+            };
+            
+            var main = function() {
+                var now = Date.now();
+                var delta = now - then;
+                
+                update(delta / 1000);
+                paint();
+                
+                if (now - lastSwitch >= 64) {
+                    if (person.moving) person.nextFrame();
+                    else person.currentFrame = 0;
+                    lastSwitch = now;
+                }
+                
+                then = now;
+            };
+            
+            var lastSwitch = Date.now();
+            var then = Date.now();
+            setInterval(main, 1);
+        </script>
+    </body>
+</html>
