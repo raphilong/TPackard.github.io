@@ -101,7 +101,7 @@ function checkOnGround(platforms) {
             if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY + this.height <= platform.y * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
                 this.onGround = true;
                 finished = true;
-                this.y = platform.y * platform.tileSize;
+                this.y = platform.y * platform.tileSize - this.height;
                 this.jumping = false;
             }
         }

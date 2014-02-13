@@ -7,6 +7,7 @@ var ctx = canvas.getContext("2d");
 /*GAME FUNCTIONS AND OBJECTS*/
 var person = new entity("Person.png", 400, 250, 200, 13, 32, 6);
 platforms.push(new platform(30, 30, 4, 1));
+platforms.push(new platform(20, 26, 6, 1));
 
 var keysDown = {};
 var right = "right";
