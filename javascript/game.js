@@ -46,7 +46,7 @@ function update(delta) {
 function paint() {
     ctx.fillStyle = "#EEEEEE";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    for (var platform of platforms) platform.draw(ctx);
+    for (var i = 0; i < platforms.length; i++) platforms[i].draw(ctx);
     person.draw(ctx);
 };
 

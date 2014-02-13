@@ -96,13 +96,15 @@ function checkOnGround(platforms) {
     // FIXME Entity sometimes falls through the platform
     var finished = false
     this.onGround = false;
-    for (var platform of platforms) {
+    for (var i = 0; i < platforms.length; i++) {
+        var platform = platforms[i];
         if (!finished) {
             if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY + this.height <= platform.y * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
                 this.onGround = true;
                 finished = true;
                 this.y = platform.y * platform.tileSize - this.height;
                 this.jumping = false;
+                this.canJump = true;
             }
         }
     }
