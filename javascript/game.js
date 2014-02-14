@@ -6,8 +6,12 @@ var ctx = canvas.getContext("2d");
 
 /*GAME FUNCTIONS AND OBJECTS*/
 var person = new entity("Person.png", 400, 250, 200, 13, 32, 6);
-platforms.push(new platform(30, 30, 4, 1));
+platforms.push(new platform(30, 30, 6, 1));
 platforms.push(new platform(20, 26, 6, 1));
+platforms.push(new platform(15, 21, 6, 1));
+platforms.push(new platform(13, 16, 6, 1));
+platforms.push(new platform(12, 11, 6, 1));
+platforms.push(new platform(12, 6, 6, 1));
 
 var keysDown = {};
 var right = "right";
@@ -28,16 +32,16 @@ function update(delta) {
     person.moving = false;
     person.checkOnGround(platforms);
     person.gravitate(delta);
-    if (38 in keysDown) {
+    if (38 in keysDown || 87 in keysDown) {
         person.move(up, delta);
     }
-    if (40 in keysDown) {
+    if (40 in keysDown || 83 in keysDown) {
         person.move(down, delta);
     }
-    if (37 in keysDown) {
+    if (37 in keysDown || 65 in keysDown) {
         person.move(left, delta);
     }
-    if (39 in keysDown) {
+    if (39 in keysDown || 68 in keysDown) {
         person.move(right, delta);
     }
     person.jump(delta);

@@ -1,5 +1,8 @@
+// FUTURE add shoot function
+// FUTURE add AI
 /*ENTITY DECLARATION*/
 function entity(imgSrc, x, y, speed, width, height, numFrames, numAnim) {
+    /*VARIABLES*/
     this.image = new Image();
     this.image.src = imgSrc;
 
@@ -21,9 +24,11 @@ function entity(imgSrc, x, y, speed, width, height, numFrames, numAnim) {
     this.jumpOffset = 0;
     this.jumpPoint = 0;
     this.gravity = true;
+    this.gravityPoint = 10;
     this.onGround = false;
     this.prevY = this.y;
-    
+
+    /*METHODS*/
     this.nextFrame = nextFrame;
     this.setFrame = setFrame;
     this.getX = getX;
@@ -93,30 +98,32 @@ function jump(delta) {
 }
 
 function checkOnGround(platforms) {
-    // FIXME Entity sometimes falls through the platform
-    var finished = false
     this.onGround = false;
     for (var i = 0; i < platforms.length; i++) {
         var platform = platforms[i];
-        if (!finished) {
-            if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY + this.height <= platform.y * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
-                this.onGround = true;
-                finished = true;
-                this.y = platform.y * platform.tileSize - this.height;
-                this.jumping = false;
-                this.canJump = true;
-            }
+        if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY + this.height <= platform.y * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
+            this.onGround = true;
+            finished = true;
+            this.y = platform.y * platform.tileSize - this.height;
+            this.jumping = false;
+            this.canJump = true;
+            this.gravityPoint = 10;
+            return;
         }
     }
     this.prevY = this.getY();
 }
 
 function gravitate(delta) {
-    console.log(this.onGround +"\n");
-    if (this.getY() < canvas.height - this.height && this.gravity && !this.onGround) this.y += 200 * delta;
+    if (this.getY() < canvas.height - this.height && this.gravity && !this.onGround) {
+        this.y += -(this.gravityPoint - 20) * this.gravityPoint;
+        this.gravityPoint += delta * 25;
+        this.y -= -(this.gravityPoint - 20) * this.gravityPoint;
+    }
     if (this.getY() >= canvas.height - this.height) {
         this.y = canvas.height - this.height;
         this.canJump = true;
+        this.gravityPoint = 10;
     }
 }
 

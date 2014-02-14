@@ -13,3 +13,5 @@ function platform(x, y, width, height, tileSize) {
     this.tileSize = tileSize || 16;
     this.draw = drawPlatform;
 }
+
+// TODO add platform tiles
