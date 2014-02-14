@@ -1,4 +1,4 @@
-var platforms = [];
+var platforms = new Array();
 
 function drawPlatform(context) {
     context.fillStyle = "#444444";

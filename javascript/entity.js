@@ -1,7 +1,7 @@
 // FUTURE add shoot function
 // FUTURE add AI
 /*ENTITY DECLARATION*/
-function entity(imgSrc, x, y, speed, width, height, numFrames, numAnim) {
+function entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim) {
     /*VARIABLES*/
     this.image = new Image();
     this.image.src = imgSrc;
@@ -16,6 +16,8 @@ function entity(imgSrc, x, y, speed, width, height, numFrames, numAnim) {
     this.numFrames = numFrames || 1;
     this.numAnim = numAnim || 1;
 
+    this.platforms = platforms || null;
+
     this.currentFrame = 0;
     this.facingRight = false;
     this.moving = false;
@@ -27,6 +29,8 @@ function entity(imgSrc, x, y, speed, width, height, numFrames, numAnim) {
     this.gravityPoint = 10;
     this.onGround = false;
     this.prevY = this.y;
+    this.prevY2 = this.y;
+    this.terminalVelocity = 20;
 
     /*METHODS*/
     this.nextFrame = nextFrame;
@@ -35,9 +39,11 @@ function entity(imgSrc, x, y, speed, width, height, numFrames, numAnim) {
     this.getY = getY;
     this.move = move;
     this.jump = jump;
+    this.canMove = canMove;
     this.checkOnGround = checkOnGround;
     this.gravitate = gravitate;
     this.draw = drawEntity;
+    this.update = updateEntity;
 }
 
 /*ENTITY FUNCTIONS*/
@@ -84,7 +90,7 @@ function move(direction, delta) {
 
 function jump(delta) {
     this.jumpPoint += delta * 25;
-    if (this.y > 0 && this.jumpPoint <= 10 && this.jumping) {
+    if (this.y > 0 && this.jumpPoint <= 10 && this.jumping && this.canMove(up)) {
         this.y += this.jumpOffset;
         this.jumpOffset = -(this.jumpPoint - 20) * this.jumpPoint;
         this.gravity = false;
@@ -97,13 +103,26 @@ function jump(delta) {
     this.y -= this.jumpOffset;
 }
 
-function checkOnGround(platforms) {
+function canMove(direction) {
+    if (direction = up) {
+        for (var i = 0; i < this.platforms.length; i++) {
+            var platform = this.platforms[i];      
+            if (this.getY() <= (platform.y + platform.height) * platform.tileSize && this.prevY2 >= (platform.y + platform.height) * platform.tileSize && this.x + this.width - 5 >= platform.x * platform.tileSize && this.x + 5 <= (platform.x + platform.width) * platform.tileSize) {
+                this.y = (platform.y + platform.height) * platform.tileSize;
+                return false;
+            }
+        }
+        this.prevY2 = this.getY();
+    }
+    return true;
+}
+
+function checkOnGround() {
     this.onGround = false;
-    for (var i = 0; i < platforms.length; i++) {
-        var platform = platforms[i];
-        if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY + this.height <= platform.y * platform.tileSize && this.x + this.width - 7 >= platform.x * platform.tileSize && this.x + 7 <= (platform.x + platform.width) * platform.tileSize) {
+    for (var i = 0; i < this.platforms.length; i++) {
+        var platform = this.platforms[i];
+        if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY + this.height - 8 <= platform.y * platform.tileSize && this.x + this.width - 5 >= platform.x * platform.tileSize && this.x + 5 <= (platform.x + platform.width) * platform.tileSize) {
             this.onGround = true;
-            finished = true;
             this.y = platform.y * platform.tileSize - this.height;
             this.jumping = false;
             if (!(38 in keysDown) && !(87 in keysDown)) this.canJump = true;
@@ -116,17 +135,22 @@ function checkOnGround(platforms) {
 
 function gravitate(delta) {
     if (this.getY() < canvas.height - this.height && this.gravity && !this.onGround) {
-        if (this.gravityPoint + delta * 25 < 20) {
+        this.canJump = false;
+        if (this.gravityPoint + delta * 25 < this.terminalVelocity) {
             this.y += -(this.gravityPoint - 20) * this.gravityPoint;
             this.gravityPoint += delta * 25;
             this.y -= -(this.gravityPoint - 20) * this.gravityPoint;
-        } else this.y += 725 * delta;
+        } else this.y += this.terminalVelocity * 25 * delta;
     }
     if (this.getY() >= canvas.height - this.height) {
         this.y = canvas.height - this.height;
         if (!(38 in keysDown) && !(87 in keysDown)) this.canJump = true;
         this.gravityPoint = 10;
     }
+}
+
+function updateEntity() {
+    console.log(this.prevY == this.prevY2);
 }
 
 function drawEntity(context) {
