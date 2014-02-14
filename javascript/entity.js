@@ -101,12 +101,12 @@ function checkOnGround(platforms) {
     this.onGround = false;
     for (var i = 0; i < platforms.length; i++) {
         var platform = platforms[i];
-        if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY + this.height <= platform.y * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
+        if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY + this.height <= platform.y * platform.tileSize && this.x + this.width - 7 >= platform.x * platform.tileSize && this.x + 7 <= (platform.x + platform.width) * platform.tileSize) {
             this.onGround = true;
             finished = true;
             this.y = platform.y * platform.tileSize - this.height;
             this.jumping = false;
-            this.canJump = true;
+            if (!(38 in keysDown) && !(87 in keysDown)) this.canJump = true;
             this.gravityPoint = 10;
             return;
         }
@@ -116,13 +116,15 @@ function checkOnGround(platforms) {
 
 function gravitate(delta) {
     if (this.getY() < canvas.height - this.height && this.gravity && !this.onGround) {
-        this.y += -(this.gravityPoint - 20) * this.gravityPoint;
-        this.gravityPoint += delta * 25;
-        this.y -= -(this.gravityPoint - 20) * this.gravityPoint;
+        if (this.gravityPoint + delta * 25 < 20) {
+            this.y += -(this.gravityPoint - 20) * this.gravityPoint;
+            this.gravityPoint += delta * 25;
+            this.y -= -(this.gravityPoint - 20) * this.gravityPoint;
+        } else this.y += 725 * delta;
     }
     if (this.getY() >= canvas.height - this.height) {
         this.y = canvas.height - this.height;
-        this.canJump = true;
+        if (!(38 in keysDown) && !(87 in keysDown)) this.canJump = true;
         this.gravityPoint = 10;
     }
 }
