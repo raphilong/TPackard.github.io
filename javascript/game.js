@@ -6,18 +6,22 @@ var ctx = canvas.getContext("2d");
 
 /*GAME FUNCTIONS AND OBJECTS*/
 var entities = new Array();
-var player = new entity("Person.png", 400, 250, 200, 13, 32, platforms, 6);
+var projectiles = new Array();
+var platforms = new Array();
+var player = new Entity("Person.png", 400, 250, 200, 13, 32, platforms, 6);
 entities.push(player);
-entities.push(new ai("AI.png", 400, 0, 125, 13, 32, platforms, 6));
+entities.push(new AI("AI.png", 400, 0, 125, 13, 32, platforms, 6));
 
-platforms.push(new platform(15, 6, 20, 1));
-platforms.push(new platform(0, 12, 15, 1));
-platforms.push(new platform(35, 12, 15, 1));
-platforms.push(new platform(15, 18, 20, 1));
-platforms.push(new platform(0, 24, 23, 1));
-platforms.push(new platform(27, 24, 23, 1));
+platforms.push(new Platform(15, 13, 20, 1));
+platforms.push(new Platform(0, 18, 15, 1));
+platforms.push(new Platform(35, 18, 15, 1));
+platforms.push(new Platform(15, 23, 20, 1));
+platforms.push(new Platform(0, 28, 23.5, 1));
+platforms.push(new Platform(0, 29, 23.5, 1));
+platforms.push(new Platform(26.5, 28, 23.5, 1));
+platforms.push(new Platform(26.5, 29, 23.5, 1));
 
-var keysDown = {};
+var keysDown = new Array();
 var right = "right";
 var left = "left";
 var up = "up";
@@ -25,7 +29,7 @@ var down = "down";
 
 document.onkeydown = function(e) {
     keysDown[e.keyCode] = true;
-    if (e.keyCode == 32 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) e.preventDefault();
+    if (e.keyCode == 32 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) e.preventDefault(); // Prevents the page from scrolling when the arrow keys or spacebar are pressed
 };
 
 document.onkeyup = function(e) {
@@ -33,10 +37,14 @@ document.onkeyup = function(e) {
 };
 
 function update(delta) {
-    for (var i = 0; i < entities.length; i++) {
-        entities[i].moving = false;
-        entities[i].gravitate(delta);
-        entities[i].update(delta);
+    entities.forEach(function(entity) {
+        entity.moving = false;
+        entity.gravitate(delta);
+        entity.update(delta);
+    });
+    projectiles.forEach(function(projectile) {projectile.update(delta)});
+    if (32 in keysDown) {
+        projectiles.push(new Projectile(player, right));
     }
     if (38 in keysDown || 87 in keysDown) {
         player.move(up, delta);
@@ -59,8 +67,9 @@ function update(delta) {
 function paint() {
     ctx.fillStyle = "#EEEEEE";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    for (var i = 0; i < platforms.length; i++) platforms[i].draw(ctx);
-    for (var i = 0; i < entities.length; i++) entities[i].draw(ctx);
+    platforms.forEach(function(platform) {platform.draw(ctx)});
+    entities.forEach(function(entity) {entity.draw(ctx)});
+    projectiles.forEach(function(projectile) {projectile.draw(ctx)});
 };
 
 function main() {

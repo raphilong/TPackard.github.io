@@ -1,7 +1,5 @@
-// FUTURE add shoot function
-// FUTURE add AI
 /*ENTITY DECLARATION*/
-function entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim) {
+function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim) {
     /*VARIABLES*/
     this.image = new Image();
     this.image.src = imgSrc;
@@ -19,78 +17,67 @@ function entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAni
     this.platforms = platforms || null;
 
     this.currentFrame = 0;
-    this.facingRight = false;
+    this.direction = "right";
     this.moving = false;
     this.jumping = false;
     this.canJump = true;
+    this.canShoot = true;
     this.jumpOffset = 0;
     this.jumpPoint = 0;
     this.gravity = true;
     this.gravityPoint = 10;
     this.onGround = false;
+    this.prevX = this.x;
     this.prevY = this.y;
     this.prevY2 = this.y;
     this.terminalVelocity = 20;
-
-    /*METHODS*/
-    this.nextFrame = nextFrame;
-    this.setFrame = setFrame;
-    this.getX = getX;
-    this.getY = getY;
-    this.move = move;
-    this.jump = jump;
-    this.canMove = canMove;
-    this.checkOnGround = checkOnGround;
-    this.gravitate = gravitate;
-    this.draw = drawEntity;
-    this.update = updateEntity;
 }
 
 /*ENTITY FUNCTIONS*/
-function nextFrame() {
+Entity.prototype.nextFrame = function() {
     this.currentFrame++;
     if (this.currentFrame >= this.numFrames) this.currentFrame = 0;
     return this.currentFrame;
 }
 
-function setFrame(frameNum) {
+Entity.prototype.setFrame = function(frameNum) {
     this.currentFrame = frameNum >= this.numFrames ? 0 : frameNum;
 }
 
-function getX() {
+Entity.prototype.getX = function() {
     return Math.round(this.x);
 }
 
-function getY() {
+Entity.prototype.getY = function() {
     return Math.round(this.y);
 }
 
-function move(direction, delta) {
+Entity.prototype.move = function(direction, delta) {
     if (direction == up && this.canJump) {
         this.jumping = true;
         this.canJump = false;
     }
 
     if (direction == right) {
-        if (this.x < canvas.width - this.width) {
+        if (this.canMove(right)) {
             this.x += this.speed * delta;
             this.moving = true;
         }
-        this.facingRight = true;
+        this.direction = right;
     }
 
     if (direction == left) {
-        if (this.x > 0) {
+        if (this.canMove(left)) {
             this.x -= this.speed * delta;
             this.moving = true;
         }
-        this.facingRight = false;
+        this.direction = left;
     }
 }
 
-function jump(delta) {
+Entity.prototype.jump = function(delta) {
     this.jumpPoint += delta * 25;
-    if (this.y > 0 && this.jumpPoint <= 10 && this.jumping && this.canMove(up)) {
+    if (this.jumpPoint <= 10 && this.jumping && this.canMove(up)) {
         this.y += this.jumpOffset;
         this.jumpOffset = -(this.jumpPoint - 20) * this.jumpPoint;
         this.gravity = false;
@@ -103,25 +90,78 @@ function jump(delta) {
     this.y -= this.jumpOffset;
 }
 
-function canMove(direction) {
-    if (direction = up) {
+Entity.prototype.canMove = function(direction) {
+    /*UP*/
+    if (direction == up) {
+        if (this.getY() <= 0) {
+            this.y = 0;
+            return false;
+        }
         for (var i = 0; i < this.platforms.length; i++) {
-            var platform = this.platforms[i];      
-            if (this.getY() <= (platform.y + platform.height) * platform.tileSize && this.prevY2 >= (platform.y + platform.height) * platform.tileSize && this.x + this.width - 5 >= platform.x * platform.tileSize && this.x + 5 <= (platform.x + platform.width) * platform.tileSize) {
+            var platform = this.platforms[i];
+            if (this.getY() <= (platform.y + platform.height) * platform.tileSize && this.prevY >= (platform.y + platform.height) * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
                 this.y = (platform.y + platform.height) * platform.tileSize;
                 return false;
             }
         }
-        this.prevY2 = this.getY();
+        this.prevY = this.getY();
+    }
+    
+    /*DOWN*/
+    if (direction == down) {
+        if (this.getY() >= canvas.height - this.height) {
+            this.y = canvas.height - this.height;
+            return false;
+        }
+        for (var i = 0; i < this.platforms.length; i++) {
+            var platform = this.platforms[i];
+            if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY + this.height <= platform.y * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
+                this.y = platform.y * platform.tileSize;
+                return false;
+            }
+        }
+        this.prevY = this.getY();
+    }
+
+    /*LEFT*/
+    if (direction == left) {
+        if (this.getX() <= 0) {
+            if (this.getX() < 0) this.x = 0;
+            return false;
+        }
+        for (var i = 0; i < this.platforms.length; i++) {
+            var platform = this.platforms[i];
+            if (this.getX() <= (platform.x + platform.width) * platform.tileSize && this.prevX >= (platform.x + platform.width) * platform.tileSize && this.y + this.height > platform.y * platform.tileSize && this.y < (platform.y + platform.height) * platform.tileSize) {
+                this.x = (platform.x + platform.width) * platform.tileSize;
+                return false;
+            }
+        }
+        this.prevX = this.getX();
+    }
+    
+    /*RIGHT*/
+    if (direction == right) {
+        if (this.getX() >= canvas.width - this.width) {
+            if (this.getX() > canvas.width - this.width) this.x = canvas.width - this.width;
+            return false;
+        }
+        for (var i = 0; i < this.platforms.length; i++) {
+            var platform = this.platforms[i];
+            if (this.getX() + this.width >= platform.x * platform.tileSize && this.prevX + this.width <= platform.x * platform.tileSize && this.y + this.height > platform.y * platform.tileSize && this.y < (platform.y + platform.height) * platform.tileSize) {
+                this.x = platform.x * platform.tileSize - this.width;
+                return false;
+            }
+        }
+        this.prevX = this.getX();
     }
     return true;
 }
 
-function checkOnGround() {
+Entity.prototype.checkOnGround = function() {
     this.onGround = false;
     for (var i = 0; i < this.platforms.length; i++) {
         var platform = this.platforms[i];
-        if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY + this.height - 8 <= platform.y * platform.tileSize && this.x + this.width - 5 >= platform.x * platform.tileSize && this.x + 5 <= (platform.x + platform.width) * platform.tileSize) {
+        if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY2 + this.height <= platform.y * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
             this.onGround = true;
             this.y = platform.y * platform.tileSize - this.height;
             this.jumping = false;
@@ -130,10 +170,10 @@ function checkOnGround() {
             return;
         }
     }
-    this.prevY = this.getY();
+    this.prevY2 = this.getY();
 }
 
-function gravitate(delta) {
+Entity.prototype.gravitate = function(delta) {
     if (this.getY() < canvas.height - this.height && this.gravity && !this.onGround) {
         this.canJump = false;
         if (this.gravityPoint + delta * 25 < this.terminalVelocity) {
@@ -149,11 +189,15 @@ function gravitate(delta) {
     }
 }
 
-function updateEntity() {
-    console.log(this.prevY == this.prevY2);
+Entity.prototype.shoot = function() {
+
 }
 
-function drawEntity(context) {
-    var offset = this.facingRight ? this.height + 1 : 0;
+Entity.prototype.update = function() {
+
+}
+
+Entity.prototype.draw = function(context) {
+    var offset = this.direction == right ? this.height + 1 : 0;
     context.drawImage(this.image, (this.currentFrame * this.width + this.currentFrame), offset, this.width, this.height, this.getX(), this.getY(), this.width, this.height);
 }
