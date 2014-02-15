@@ -1,8 +1,8 @@
 function Projectile(shooter) {
     this.shooter = shooter;
     this.direction = this.shooter.direction;
-    this.x = shooter.getX();
-    this.y = shooter.getY();
+    this.x = shooter.getX() + 4;
+    this.y = shooter.getY() + 8;
 }
 
 Projectile.prototype.getX = function() {
@@ -14,10 +14,10 @@ Projectile.prototype.getY = function() {
 }
 
 Projectile.prototype.update = function(delta) {
-	this.direction == left ? this.x -= 300 * delta : this.x += 300 * delta;
+	this.direction == left ? this.x -= 500 * delta : this.x += 500 * delta;
 }
 
 Projectile.prototype.draw = function(context) {
-	context.fillStyle = "#888888";
-	context.fillRect(this.getX(), this.getY(), 5, 5);
+	context.fillStyle = "#444444";
+	context.fillRect(this.getX(), this.getY(), 4, 2);
 }

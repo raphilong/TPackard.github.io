@@ -6,7 +6,6 @@ var ctx = canvas.getContext("2d");
 
 /*GAME FUNCTIONS AND OBJECTS*/
 var entities = new Array();
-var projectiles = new Array();
 var platforms = new Array();
 var player = new Entity("Person.png", 400, 250, 200, 13, 32, platforms, 6);
 entities.push(player);
@@ -41,10 +40,10 @@ function update(delta) {
         entity.moving = false;
         entity.gravitate(delta);
         entity.update(delta);
+        entities.forEach(function(otherEntity) {entity.checkAlive(otherEntity)});
     });
-    projectiles.forEach(function(projectile) {projectile.update(delta)});
     if (32 in keysDown) {
-        projectiles.push(new Projectile(player, right));
+        player.shoot();
     }
     if (38 in keysDown || 87 in keysDown) {
         player.move(up, delta);
@@ -69,7 +68,6 @@ function paint() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     platforms.forEach(function(platform) {platform.draw(ctx)});
     entities.forEach(function(entity) {entity.draw(ctx)});
-    projectiles.forEach(function(projectile) {projectile.draw(ctx)});
 };
 
 function main() {

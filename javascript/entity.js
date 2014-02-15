@@ -31,6 +31,9 @@ function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAni
     this.prevY = this.y;
     this.prevY2 = this.y;
     this.terminalVelocity = 20;
+    this.projectiles = new Array();
+    this.alive = true;
+    this.timeSinceDeath = 0;
 }
 
 /*ENTITY FUNCTIONS*/
@@ -190,14 +193,23 @@ Entity.prototype.gravitate = function(delta) {
 }
 
 Entity.prototype.shoot = function() {
-
+    if (this.canShoot) {
+        this.canShoot = false;
+        this.projectiles.push(new Projectile(this));
+    }
 }
 
-Entity.prototype.update = function() {
+Entity.prototype.update = function(delta) {
+    if (!(32 in keysDown)) this.canShoot = true;
+    this.projectiles.forEach(function(projectile) {projectile.update(delta)});
+}
+
+Entity.prototype.checkAlive = function() {
 
 }
 
 Entity.prototype.draw = function(context) {
+    this.projectiles.forEach(function(projectile) {projectile.draw(ctx)});
     var offset = this.direction == right ? this.height + 1 : 0;
     context.drawImage(this.image, (this.currentFrame * this.width + this.currentFrame), offset, this.width, this.height, this.getX(), this.getY(), this.width, this.height);
 }
