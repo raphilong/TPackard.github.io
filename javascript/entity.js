@@ -34,6 +34,9 @@ function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAni
     this.projectiles = new Array();
     this.alive = true;
     this.timeSinceDeath = 0;
+    this.respawnX = this.x;
+    this.respawnY = this.y;
+    this.score = 0;
 }
 
 /*ENTITY FUNCTIONS*/
@@ -128,7 +131,7 @@ Entity.prototype.canMove = function(direction) {
 
     /*LEFT*/
     if (direction == left) {
-        if (this.getX() <= 0) {
+        if (this.getX() <= 0 && this.alive) {
             if (this.getX() < 0) this.x = 0;
             return false;
         }
@@ -200,12 +203,33 @@ Entity.prototype.shoot = function() {
 }
 
 Entity.prototype.update = function(delta) {
-    if (!(32 in keysDown)) this.canShoot = true;
     this.projectiles.forEach(function(projectile) {projectile.update(delta)});
+    if (this.alive) {
+        if (!(32 in keysDown)) this.canShoot = true;
+    } else {
+        this.x = -1000;
+        if (this.timeSinceDeath < 1) this.timeSinceDeath += delta;
+        else this.respawn();
+    }
 }
 
-Entity.prototype.checkAlive = function() {
+Entity.prototype.respawn = function() {
+    this.x = this.respawnX;
+    this.y = this.respawnY;
+    this.alive = true;
+    this.timeSinceDeath = 0;
+    this.projectiles = new Array();
+    this.canJump = true;
+    this.score = 0;
+    resetKeys();
+}
 
+Entity.prototype.checkAlive = function(entity) {
+        if (entity != this && entity != crate && entity.x > this.x && entity.x < this.x + this.width && entity.y + entity.height > this.y && entity.y < this.y + this.height) {
+            this.alive = false;
+            this.x = -1000;
+            alert("Your got a score of " + this.score);
+        }
 }
 
 Entity.prototype.draw = function(context) {

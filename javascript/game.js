@@ -8,23 +8,31 @@ var ctx = canvas.getContext("2d");
 var entities = new Array();
 var platforms = new Array();
 var player = new Entity("Person.png", 400, 250, 200, 13, 32, platforms, 6);
+var crate = new Crate(platforms);
 entities.push(player);
-entities.push(new AI("AI.png", 400, 0, 125, 13, 32, platforms, 6));
+entities.push(crate);
+
+for (var i = 0; i < 16; i++) entities.push(new AI("AI.png", 400, 174, 125, 13, 32, platforms, 6));
+
 
 platforms.push(new Platform(15, 13, 20, 1));
 platforms.push(new Platform(0, 18, 15, 1));
 platforms.push(new Platform(35, 18, 15, 1));
 platforms.push(new Platform(15, 23, 20, 1));
-platforms.push(new Platform(0, 28, 23.5, 1));
-platforms.push(new Platform(0, 29, 23.5, 1));
-platforms.push(new Platform(26.5, 28, 23.5, 1));
-platforms.push(new Platform(26.5, 29, 23.5, 1));
+platforms.push(new Platform(0, 28, 14, 1));
+platforms.push(new Platform(0, 29, 23, 1));
+platforms.push(new Platform(36, 28, 14, 1));
+platforms.push(new Platform(27, 29, 23, 1));
 
 var keysDown = new Array();
-var right = "right";
-var left = "left";
-var up = "up";
-var down = "down";
+function resetKeys() {
+    keysDown = new Array();
+}
+
+const right = "right";
+const left = "left";
+const up = "up";
+const down = "down";
 
 document.onkeydown = function(e) {
     keysDown[e.keyCode] = true;

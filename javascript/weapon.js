@@ -2,7 +2,7 @@ function Projectile(shooter) {
     this.shooter = shooter;
     this.direction = this.shooter.direction;
     this.x = shooter.getX() + 4;
-    this.y = shooter.getY() + 8;
+    this.y = shooter.getY() + 16;
 }
 
 Projectile.prototype.getX = function() {
