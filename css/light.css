@@ -136,7 +136,7 @@ a.content:active {
 h2 {
 	color:#0090FF;
 	margin: 0;
-	padding: 0;
+	padding: 5px 0px;
 }
 
 li {
@@ -202,4 +202,27 @@ nav > a:active {
 	-moz-transition:.2s;
 	-webkit-transition:.2s;
 	transition:.2s;
+}
+
+footer {
+	text-align: center;
+	padding-top: 20px;
+	color: #888888;
+	font-size: 12px;
+}
+
+footer > a {
+	text-decoration: none;
+	color: #888888;
+}
+
+footer > a:hover, a:active {
+	color: #0090FF;
+}
+
+#disqus_thread {
+	width: 60%;
+	margin-top: 50px;
+	margin-left:auto;
+	margin-right:auto;
 }

@@ -230,7 +230,7 @@ Entity.prototype.checkAlive = function(entity) {
         if (entity != this && entity.x > this.x && entity.x < this.x + this.width && entity.y + entity.height > this.y && entity.y < this.y + this.height) {
             this.alive = false;
             this.x = -1000;
-            alert("Your got a score of " + this.score);
+            alert("You died");
         }
 }
 
