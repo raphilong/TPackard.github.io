@@ -4,8 +4,8 @@ function Crate(platforms) {
 Crate.prototype = new Entity;
 
 Crate.prototype.respawn = function() {
-	this.x = Math.random() * canvas.width;
-	this.y = Math.random() * canvas.height;
+	this.x = Math.random() * (canvas.width - 16);
+	this.y = Math.random() * (canvas.height - 32);
 }
 
 Crate.prototype.draw = function(context) {

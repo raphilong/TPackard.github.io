@@ -87,6 +87,7 @@ Entity.prototype.jump = function(delta) {
         this.y += this.jumpOffset;
         this.jumpOffset = -(this.jumpPoint - 20) * this.jumpPoint;
         this.gravity = false;
+        this.currentFrame = 1;
     } else {
         this.jumpPoint = 0;
         this.jumpOffset = 0;
@@ -187,6 +188,7 @@ Entity.prototype.gravitate = function(delta) {
             this.gravityPoint += delta * 25;
             this.y -= -(this.gravityPoint - 20) * this.gravityPoint;
         } else this.y += this.terminalVelocity * 25 * delta;
+        this.currentFrame = 1;
     }
     if (this.getY() >= canvas.height - this.height) {
         this.y = canvas.height - this.height;
@@ -225,7 +227,7 @@ Entity.prototype.respawn = function() {
 }
 
 Entity.prototype.checkAlive = function(entity) {
-        if (entity != this && entity != crate && entity.x > this.x && entity.x < this.x + this.width && entity.y + entity.height > this.y && entity.y < this.y + this.height) {
+        if (entity != this && entity.x > this.x && entity.x < this.x + this.width && entity.y + entity.height > this.y && entity.y < this.y + this.height) {
             this.alive = false;
             this.x = -1000;
             alert("Your got a score of " + this.score);

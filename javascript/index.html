@@ -13,22 +13,29 @@
 		<script src="/js/setCSS.js"></script>
 		<noscript><link href="/css/light.css" rel="stylesheet" type="text/css"></noscript>
 		<link href="/css/grid.css" rel="stylesheet" type="text/css">
+
+		<!--Game JS-->
         <script src="entity.js"></script>
         <script src="platform.js"></script>
         <script src="npc.js"></script>
         <script src="weapon.js"></script>
-        <script src="crate.js"></script>
     </head>
     
     <body>
         <div class="grid">
 			<div class="node-8">
-				<header>TYLER<span class="Ultra-Light">PACKARD</span></header>
+				<header>TYLER<span class="Thin">PACKARD</span></header>
 				<center><subheader><span class="spread">帕泰</span>乐</subheader></center>
-                <br>
 			</div>
-        <div class="node-8">
-            <center><canvas id = "canvas"><script src="game.js"></script></canvas></center>
-        </div>
+			<nav class="node-8" id="nav">
+				<a href="/">Home</a>
+				<a href="/java">Java</a>
+				<a href="/javascript">Javascript</a>
+				<a href="/pixels">Pixels</a>
+			</nav>
+        	<div class="node-8">
+        		<br>
+            	<center><canvas id = "canvas"><script src="game.js"></script></canvas></center>
+        	</div>
     </body>
 </html>

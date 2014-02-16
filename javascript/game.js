@@ -7,12 +7,10 @@ var ctx = canvas.getContext("2d");
 /*GAME FUNCTIONS AND OBJECTS*/
 var entities = new Array();
 var platforms = new Array();
-var player = new Entity("Person.png", 400, 250, 200, 13, 32, platforms, 6);
-var crate = new Crate(platforms);
+var player = new Entity("Shadow.png", 400, 250, 200, 13, 32, platforms, 6);
 entities.push(player);
-entities.push(crate);
 
-for (var i = 0; i < 16; i++) entities.push(new AI("AI.png", 400, 174, 125, 13, 32, platforms, 6));
+entities.push(new AI("Shadow.png", 400, 174, 125, 13, 32, platforms, 6));
 
 
 platforms.push(new Platform(15, 13, 20, 1));
