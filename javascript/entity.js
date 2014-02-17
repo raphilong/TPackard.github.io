@@ -17,7 +17,7 @@ function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAni
     this.platforms = platforms || null;
 
     this.currentFrame = 0;
-    this.direction = "right";
+    this.direction = RIGHT;
     this.moving = false;
     this.jumping = false;
     this.canJump = true;
@@ -59,31 +59,31 @@ Entity.prototype.getY = function() {
 }
 
 Entity.prototype.move = function(direction, delta) {
-    if (direction == up && this.canJump) {
+    if (direction == UP && this.canJump) {
         this.jumping = true;
         this.canJump = false;
     }
 
-    if (direction == right) {
-        if (this.canMove(right)) {
+    if (direction == RIGHT) {
+        if (this.canMove(RIGHT)) {
             this.x += this.speed * delta;
             this.moving = true;
         }
-        this.direction = right;
+        this.direction = RIGHT;
     }
 
-    if (direction == left) {
-        if (this.canMove(left)) {
+    if (direction == LEFT) {
+        if (this.canMove(LEFT)) {
             this.x -= this.speed * delta;
             this.moving = true;
         }
-        this.direction = left;
+        this.direction = LEFT;
     }
 }
 
 Entity.prototype.jump = function(delta) {
     this.jumpPoint += delta * 25;
-    if (this.jumpPoint <= 10 && this.jumping && this.canMove(up)) {
+    if (this.jumpPoint <= 10 && this.jumping && this.canMove(UP)) {
         this.y += this.jumpOffset;
         this.jumpOffset = -(this.jumpPoint - 20) * this.jumpPoint;
         this.gravity = false;
@@ -99,7 +99,7 @@ Entity.prototype.jump = function(delta) {
 
 Entity.prototype.canMove = function(direction) {
     /*UP*/
-    if (direction == up) {
+    if (direction == UP) {
         if (this.getY() <= 0) {
             this.y = 0;
             return false;
@@ -115,7 +115,7 @@ Entity.prototype.canMove = function(direction) {
     }
     
     /*DOWN*/
-    if (direction == down) {
+    if (direction == DOWN) {
         if (this.getY() >= canvas.height - this.height) {
             this.y = canvas.height - this.height;
             return false;
@@ -131,7 +131,7 @@ Entity.prototype.canMove = function(direction) {
     }
 
     /*LEFT*/
-    if (direction == left) {
+    if (direction == LEFT) {
         if (this.getX() <= 0 && this.alive) {
             if (this.getX() < 0) this.x = 0;
             return false;
@@ -147,7 +147,7 @@ Entity.prototype.canMove = function(direction) {
     }
     
     /*RIGHT*/
-    if (direction == right) {
+    if (direction == RIGHT) {
         if (this.getX() >= canvas.width - this.width) {
             if (this.getX() > canvas.width - this.width) this.x = canvas.width - this.width;
             return false;
@@ -172,7 +172,7 @@ Entity.prototype.checkOnGround = function() {
             this.onGround = true;
             this.y = platform.y * platform.tileSize - this.height;
             this.jumping = false;
-            if (!(38 in keysDown) && !(87 in keysDown)) this.canJump = true;
+            if (!(UP_ARROW in keysDown) && !(W in keysDown)) this.canJump = true;
             this.gravityPoint = 10;
             return;
         }
@@ -192,7 +192,7 @@ Entity.prototype.gravitate = function(delta) {
     }
     if (this.getY() >= canvas.height - this.height) {
         this.y = canvas.height - this.height;
-        if (!(38 in keysDown) && !(87 in keysDown)) this.canJump = true;
+        if (!(UP_ARROW in keysDown) && !(W in keysDown)) this.canJump = true;
         this.gravityPoint = 10;
     }
 }
@@ -207,7 +207,7 @@ Entity.prototype.shoot = function() {
 Entity.prototype.update = function(delta) {
     this.projectiles.forEach(function(projectile) {projectile.update(delta)});
     if (this.alive) {
-        if (!(32 in keysDown)) this.canShoot = true;
+        if (!(SPACE in keysDown)) this.canShoot = true;
     } else {
         this.x = -1000;
         if (this.timeSinceDeath < 1) this.timeSinceDeath += delta;
@@ -236,6 +236,6 @@ Entity.prototype.checkAlive = function(entity) {
 
 Entity.prototype.draw = function(context) {
     this.projectiles.forEach(function(projectile) {projectile.draw(ctx)});
-    var offset = this.direction == right ? this.height + 1 : 0;
+    var offset = this.direction == RIGHT ? this.height + 1 : 0;
     context.drawImage(this.image, (this.currentFrame * this.width + this.currentFrame), offset, this.width, this.height, this.getX(), this.getY(), this.width, this.height);
 }

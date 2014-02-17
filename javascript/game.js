@@ -5,12 +5,14 @@ canvas.height = 480;
 var ctx = canvas.getContext("2d");
 
 /*GAME FUNCTIONS AND OBJECTS*/
+var num = document.getElementById("num");
+
 var entities = new Array();
 var platforms = new Array();
-var player = new Entity("Shadow.png", 400, 250, 200, 13, 32, platforms, 6);
+var player = new Entity("Person.png", 400, 250, 200, 13, 32, platforms, 6);
 entities.push(player);
 
-entities.push(new AI("Shadow.png", 400, 174, 125, 13, 32, platforms, 6));
+entities.push(new AI("AI.png", 400, 174, 125, 13, 32, platforms, 6));
 
 
 platforms.push(new Platform(15, 13, 20, 1));
@@ -27,14 +29,9 @@ function resetKeys() {
     keysDown = new Array();
 }
 
-const right = "right";
-const left = "left";
-const up = "up";
-const down = "down";
-
 document.onkeydown = function(e) {
     keysDown[e.keyCode] = true;
-    if (e.keyCode == 32 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) e.preventDefault(); // Prevents the page from scrolling when the arrow keys or spacebar are pressed
+    if (e.keyCode == SPACE || e.keyCode == UP_ARROW || e.keyCode == DOWN_ARROW || e.keyCode == LEFT_ARROW || e.keyCode == RIGHT_ARROW) e.preventDefault(); // Prevents the page from scrolling when the arrow keys or spacebar are pressed
 };
 
 document.onkeyup = function(e) {
@@ -48,33 +45,33 @@ function update(delta) {
         entity.update(delta);
         entities.forEach(function(otherEntity) {entity.checkAlive(otherEntity)});
     });
-    if (32 in keysDown) {
+    if (SPACE in keysDown) {
         player.shoot();
     }
-    if (38 in keysDown || 87 in keysDown) {
-        player.move(up, delta);
+    if (UP_ARROW in keysDown || W in keysDown) {
+        player.move(UP, delta);
     }
-    if (40 in keysDown || 83 in keysDown) {
-        player.move(down, delta);
+    if (DOWN_ARROW in keysDown || S in keysDown) {
+        player.move(DOWN, delta);
     }
-    if (37 in keysDown || 65 in keysDown) {
-        player.move(left, delta);
+    if (LEFT_ARROW in keysDown || A in keysDown) {
+        player.move(LEFT, delta);
     }
-    if (39 in keysDown || 68 in keysDown) {
-        player.move(right, delta);
+    if (RIGHT_ARROW in keysDown || D in keysDown) {
+        player.move(RIGHT, delta);
     }
     for (var i = 0; i < entities.length; i++) {
         entities[i].jump(delta);
         entities[i].checkOnGround();
     }
-};
+}
 
 function paint() {
     ctx.fillStyle = "#EEEEEE";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     platforms.forEach(function(platform) {platform.draw(ctx)});
     entities.forEach(function(entity) {entity.draw(ctx)});
-};
+}
 
 function main() {
     var now = Date.now();
@@ -88,9 +85,11 @@ function main() {
         lastSwitch = now;
     }
 
+    num.innerHTML = String(player.projectiles.length);
+
     then = now;
     setTimeout(main, 1);
-};
+}
 
 /*START GAME*/
 var lastSwitch = Date.now();

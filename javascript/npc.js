@@ -1,7 +1,7 @@
 function AI(imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim) {
     Entity.call(this, imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim);
-    if (Math.random() >= 0.5) this.direction = "right";
-    else this.direction = "left";
+    if (Math.random() >= 0.5) this.direction = RIGHT;
+    else this.direction = LEFT;
     this.respawnX = this.x;
     this.respawnY = this.y;
 }
@@ -10,11 +10,11 @@ AI.prototype = new Entity;
 
 AI.prototype.update = function(delta) {
     if (this.alive) {
-        if (this.direction == right && !this.canMove(right)) {
-            this.direction = left;
+        if (this.direction == RIGHT && !this.canMove(RIGHT)) {
+            this.direction = LEFT;
         }
-        if (this.direction == left && !this.canMove(left)) {
-            this.direction = right;
+        if (this.direction == LEFT && !this.canMove(LEFT)) {
+            this.direction = RIGHT;
         }
         if (this.y >= canvas.height - this.height) this.respawn();
         this.move(this.direction, delta);
@@ -30,8 +30,8 @@ AI.prototype.respawn = function() {
     this.y = this.respawnY;
     this.alive = true;
     this.timeSinceDeath = 0;
-    if (Math.random() >= 0.5) this.direction = right;
-    else this.direction = left;
+    if (Math.random() >= 0.5) this.direction = RIGHT;
+    else this.direction = LEFT;
 }
 
 AI.prototype.checkAlive = function(entity) {

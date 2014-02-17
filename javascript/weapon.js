@@ -14,7 +14,7 @@ Projectile.prototype.getY = function() {
 }
 
 Projectile.prototype.update = function(delta) {
-	this.direction == left ? this.x -= 500 * delta : this.x += 500 * delta;
+	this.direction == LEFT ? this.x -= 500 * delta : this.x += 500 * delta;
 }
 
 Projectile.prototype.draw = function(context) {
