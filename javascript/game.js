@@ -5,7 +5,7 @@ canvas.height = 480;
 var ctx = canvas.getContext("2d");
 
 /*GAME FUNCTIONS AND OBJECTS*/
-var num = document.getElementById("num");
+//var num = document.getElementById("num");
 
 var entities = new Array();
 var platforms = new Array();
@@ -85,7 +85,7 @@ function main() {
         lastSwitch = now;
     }
 
-    num.innerHTML = String(player.projectiles.length);
+    //num.innerHTML = String(player.projectiles.length);
 
     then = now;
     setTimeout(main, 1);
