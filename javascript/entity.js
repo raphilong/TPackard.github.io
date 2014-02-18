@@ -65,7 +65,7 @@ Entity.prototype.move = function(direction, delta) {
     }
 
     if (direction == RIGHT) {
-        if (this.canMove(RIGHT)) {
+        if (this.canMove(RIGHT, delta)) {
             this.x += this.speed * delta;
             this.moving = true;
         }
@@ -73,7 +73,7 @@ Entity.prototype.move = function(direction, delta) {
     }
 
     if (direction == LEFT) {
-        if (this.canMove(LEFT)) {
+        if (this.canMove(LEFT, delta)) {
             this.x -= this.speed * delta;
             this.moving = true;
         }
@@ -97,16 +97,18 @@ Entity.prototype.jump = function(delta) {
     this.y -= this.jumpOffset;
 }
 
-Entity.prototype.canMove = function(direction) {
+Entity.prototype.canMove = function(direction, delta) {
+    var change = 0;
     /*UP*/
     if (direction == UP) {
+        if (change != 0) this.prevY = this.getY();
         if (this.getY() <= 0) {
             this.y = 0;
             return false;
         }
         for (var i = 0; i < this.platforms.length; i++) {
             var platform = this.platforms[i];
-            if (this.getY() <= (platform.y + platform.height) * platform.tileSize && this.prevY >= (platform.y + platform.height) * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
+            if (this.getY() - change <= (platform.y + platform.height) * platform.tileSize && this.prevY >= (platform.y + platform.height) * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
                 this.y = (platform.y + platform.height) * platform.tileSize;
                 return false;
             }
@@ -116,13 +118,14 @@ Entity.prototype.canMove = function(direction) {
     
     /*DOWN*/
     if (direction == DOWN) {
+        if (change != 0) this.prevY = this.getY();
         if (this.getY() >= canvas.height - this.height) {
             this.y = canvas.height - this.height;
             return false;
         }
         for (var i = 0; i < this.platforms.length; i++) {
             var platform = this.platforms[i];
-            if (this.getY() + this.height >= platform.y * platform.tileSize && this.prevY + this.height <= platform.y * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
+            if (this.getY() + change + this.height >= platform.y * platform.tileSize && this.prevY + this.height <= platform.y * platform.tileSize && this.x + this.width >= platform.x * platform.tileSize && this.x <= (platform.x + platform.width) * platform.tileSize) {
                 this.y = platform.y * platform.tileSize;
                 return false;
             }
@@ -130,6 +133,7 @@ Entity.prototype.canMove = function(direction) {
         this.prevY = this.getY();
     }
 
+    change = delta * this.speed || 0;
     /*LEFT*/
     if (direction == LEFT) {
         if (this.getX() <= 0 && this.alive) {
@@ -138,7 +142,7 @@ Entity.prototype.canMove = function(direction) {
         }
         for (var i = 0; i < this.platforms.length; i++) {
             var platform = this.platforms[i];
-            if (this.getX() <= (platform.x + platform.width) * platform.tileSize && this.prevX >= (platform.x + platform.width) * platform.tileSize && this.y + this.height > platform.y * platform.tileSize && this.y < (platform.y + platform.height) * platform.tileSize) {
+            if (this.getX() - change <= (platform.x + platform.width) * platform.tileSize && this.prevX >= (platform.x + platform.width) * platform.tileSize && this.y + this.height > platform.y * platform.tileSize && this.y < (platform.y + platform.height) * platform.tileSize) {
                 this.x = (platform.x + platform.width) * platform.tileSize;
                 return false;
             }
@@ -154,7 +158,7 @@ Entity.prototype.canMove = function(direction) {
         }
         for (var i = 0; i < this.platforms.length; i++) {
             var platform = this.platforms[i];
-            if (this.getX() + this.width >= platform.x * platform.tileSize && this.prevX + this.width <= platform.x * platform.tileSize && this.y + this.height > platform.y * platform.tileSize && this.y < (platform.y + platform.height) * platform.tileSize) {
+            if (this.getX() + change + this.width >= platform.x * platform.tileSize && this.prevX + this.width <= platform.x * platform.tileSize && this.y + this.height > platform.y * platform.tileSize && this.y < (platform.y + platform.height) * platform.tileSize) {
                 this.x = platform.x * platform.tileSize - this.width;
                 return false;
             }
@@ -205,7 +209,14 @@ Entity.prototype.shoot = function() {
 }
 
 Entity.prototype.update = function(delta) {
-    this.projectiles.forEach(function(projectile) {projectile.update(delta)});
+    for (var i = 0; i < this.projectiles.length; i++) {
+        var projectile = this.projectiles[i];
+        projectile.update(delta);
+        if (projectile.x < -10 || projectile.x > canvas.width + 10) {
+            this.projectiles.splice(i, 1);
+            i--;
+        }
+    }
     if (this.alive) {
         if (!(SPACE in keysDown)) this.canShoot = true;
     } else {
@@ -230,7 +241,6 @@ Entity.prototype.checkAlive = function(entity) {
         if (entity != this && entity.x > this.x && entity.x < this.x + this.width && entity.y + entity.height > this.y && entity.y < this.y + this.height) {
             this.alive = false;
             this.x = -1000;
-            alert("You died");
         }
 }
 

@@ -26,14 +26,14 @@ html {
 body {
 	margin: 0;
 	margin-top: 15px;
-	padding: 0cm 112px;
 	height: 100%;
+	padding: 0px;
 }
 
 header {
 	float: top;
 	text-align: center;
-	font-size: 68px;
+	font-size: 72px;
 	color: #888888;
 }
 
@@ -52,10 +52,13 @@ span.spread {
 	font-family: 'Thin';
 }
 
+a.content {
+	padding: 0;
+	text-decoration:none;
+}
+
 a.content:link {
 	color:#0090FF;
-	text-decoration:none;
-	font-weight: 400;
 	background-color: #EEEEEE;
 	border: 2px solid #EEEEEE;
 	border-bottom-width: 2px;
@@ -70,8 +73,6 @@ a.content:link {
 }
 a.content:visited {
 	color:#0090FF;
-	text-decoration:none;
-	font-weight: 400;
 	background-color: #EEEEEE;
 	border: 2px solid #EEEEEE;
 	border-bottom-width: 2px;
@@ -86,8 +87,6 @@ a.content:visited {
 }
 a.content:hover {
 	color:#FFFFFF;
-	text-decoration:none;
-	font-weight: 400;
 	background-color: #0090FF;
 	border: 2px solid #0090FF;
 	border-bottom-width: 2px;
@@ -101,11 +100,9 @@ a.content:hover {
 	transition: color .4s ease-out, background-color .6s ease-in, border-color .6s ease-in;
 }
 a.content:active {
-	color:#F5F5F5;
-	text-decoration:none;
-	font-weight: 400;
-	background-color: #0080EF;
-	border: 2px solid #0080EF;
+	color:#444444;
+	background-color: #0090FF;
+	border: 2px solid #0090FF;
 	border-bottom-width: 2px;
 	border-top-width: 1px;
 	border-left-width: 3px;
@@ -122,6 +119,7 @@ a.content:active {
 	text-align: justify;
 	color: #888888;
 	line-height: 130%;
+	padding: 0cm 150px;
 }
 
 .article-stub {
@@ -155,7 +153,6 @@ nav {
 	margin: 10px 0px;
 	text-align: center;
 	background-color: #0090FF;
-	border-radius: 50px;
 }
 
 nav > a {

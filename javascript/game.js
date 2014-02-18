@@ -5,15 +5,11 @@ canvas.height = 480;
 var ctx = canvas.getContext("2d");
 
 /*GAME FUNCTIONS AND OBJECTS*/
-//var num = document.getElementById("num");
 
 var entities = new Array();
 var platforms = new Array();
 var player = new Entity("Person.png", 400, 250, 200, 13, 32, platforms, 6);
 entities.push(player);
-
-entities.push(new AI("AI.png", 400, 174, 125, 13, 32, platforms, 6));
-
 
 platforms.push(new Platform(15, 13, 20, 1));
 platforms.push(new Platform(0, 18, 15, 1));
@@ -63,6 +59,10 @@ function update(delta) {
     for (var i = 0; i < entities.length; i++) {
         entities[i].jump(delta);
         entities[i].checkOnGround();
+        if (!entities[i].alive && entities[i] != player) {
+            entities.splice(i, 1);
+            i--;
+        }
     }
 }
 
@@ -85,7 +85,7 @@ function main() {
         lastSwitch = now;
     }
 
-    //num.innerHTML = String(player.projectiles.length);
+    if (Math.random() < 0.005) entities.push(new AI("AI.png", 400, 174, 125, 13, 32, platforms, 6));
 
     then = now;
     setTimeout(main, 1);

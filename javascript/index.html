@@ -12,7 +12,6 @@
 		<script src="/js/analytics.js"></script>
 		<script src="/js/setCSS.js"></script>
 		<noscript><link href="/css/light.css" rel="stylesheet" type="text/css"></noscript>
-		<link href="/css/grid.css" rel="stylesheet" type="text/css">
 
 		<!--Game JS-->
 		<script src="constants.js"></script>
@@ -23,26 +22,28 @@
     </head>
     
     <body>
-        <div class="grid">
-			<div class="node-8">
-				<header>TYLER<span class="Thin">PACKARD</span></header>
-				<center><subheader><span class="spread">帕泰</span>乐</subheader></center>
-			</div>
-			<nav class="node-8" id="nav">
-				<a href="/">Home</a>
-				<a href="/java">Java</a>
-				<a href="/javascript">Javascript</a>
-				<a href="/pixels">Pixels</a>
-			</nav>
-        	<div class="node-8">
-        		<br>
-            	<center><canvas id = "canvas"><script src="game.js"></script>Your browser sucks. Get <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a>, the only browser with the latest version of javascript.</canvas></center>
-            	<h2>Controls</h2>
-            	Use the arrow keys or WASD to move and jump, and press the spacebar to shoot
-            	<h2>Objective</h2>
-            	What is an objective?
-        	</div>
-        	<footer class="node-8">&copy; 2014 Tyler Packard. <a href="/policies/privacy">Privacy Policy</a></footer>
+		<div>
+			<header>TYLER<span class="Thin">PACKARD</span></header>
+			<center><subheader><span class="spread">帕泰</span>乐</subheader></center>
+		</div>
+		<nav>
+			<a href="/">Home</a>
+			<a href="/java">Java</a>
+			<a href="/javascript">Javascript</a>
+			<a href="/pixels">Pixels</a>
+		</nav>
+        <div>
+        	<br>
+           	<center><canvas id = "canvas">Your browser sucks. Get <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a>, the only browser with the latest version of javascript.</canvas></center>
         </div>
+        <div class="content">
+        	<br>
+           	<h2>Controls</h2>
+           	Use the arrow keys or WASD to move and jump, and press the spacebar to shoot
+           	<h2>Objective</h2>
+           	What is an objective?
+        </div>
+        <footer>&copy; 2014 Tyler Packard. <a href="/policies/privacy">Privacy Policy</a></footer>
+        <script src="game.js"></script>
     </body>
 </html>
