@@ -41,6 +41,7 @@ AI.prototype.checkAlive = function(entity) {
     entity.projectiles.forEach(function(projectile) {
         if (projectile.x > me.x && projectile.x < me.x + me.width && projectile.y > me.y && projectile.y < me.y + me.height) {
             me.alive = false;
+            player.score++;
             entity.projectiles.splice(index, index + 1);
         }
         index++;

@@ -5,6 +5,9 @@ canvas.height = 480;
 var ctx = canvas.getContext("2d");
 
 /*GAME FUNCTIONS AND OBJECTS*/
+var precanvas = document.getElementById("precanvas");
+precanvas.style.width = String(canvas.width) + "px";
+precanvas.style.background = "#EEEEEE";
 
 var entities = new Array();
 var platforms = new Array();
@@ -71,6 +74,7 @@ function paint() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     platforms.forEach(function(platform) {platform.draw(ctx)});
     entities.forEach(function(entity) {entity.draw(ctx)});
+    precanvas.innerHTML = "Score: " + player.score;
 }
 
 function main() {
@@ -85,7 +89,7 @@ function main() {
         lastSwitch = now;
     }
 
-    if (Math.random() < 0.005) entities.push(new AI("AI.png", 400, 174, 125, 13, 32, platforms, 6));
+    if (Math.random() < 0.005 && entities.length < 10) entities.push(new AI("AI.png", 400, 174, 125, 13, 32, platforms, 6));
 
     then = now;
     setTimeout(main, 1);

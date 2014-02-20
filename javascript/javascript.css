@@ -1,0 +1,20 @@
+@charset = "UTF-8";
+
+#precanvas {
+	background: #FFFFFF;
+	padding-top: 10px;
+}
+
+#postcanvas {
+	background: #FFFFFF;
+	padding-bottom: 10px;
+}
+
+canvas {
+	padding: 0px;
+	margin: 0px;
+	image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -o-crisp-edges;
+    image-rendering: optimize-contrast;
+}

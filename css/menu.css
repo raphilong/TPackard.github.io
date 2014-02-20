@@ -1,0 +1,39 @@
+/* Submenu - Inspired by John Gruber's porject submenus at daringfireball.net */
+submenu ul {
+	list-style: none outside;
+	padding: 0px;
+	margin: 0px;
+	height: 32px;
+	padding-left: 150px;
+}
+
+submenu li {
+	display: inline;
+	padding: 0px;
+	margin: 0px;
+}
+
+submenu li a {
+	min-width: 100px;
+	padding: 0px;
+	margin: 0px;
+	text-decoration: none;
+	text-align: center;
+	display: block;
+	color: #FFFFFF;
+	border: 1px solid #0090FF;
+	background: #FFFFFF;
+	float: left;
+	margin-left: -1px;
+	color: #0090FF;
+}
+
+submenu li a:hover {
+	background: #EAF0FF;
+	color: #0090FF;
+}
+
+submenu li a.selected, submenu li a:active {
+	background: #0090FF;
+	color: #FFFFFF;
+}
