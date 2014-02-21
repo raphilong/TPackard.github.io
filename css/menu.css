@@ -4,13 +4,14 @@ submenu ul {
 	padding: 0px;
 	margin: 0px;
 	height: 32px;
-	padding-left: 150px;
+	padding-left: 50%;
 }
 
 submenu li {
 	display: inline;
 	padding: 0px;
 	margin: 0px;
+	counter-increment: numLi;
 }
 
 submenu li a {
@@ -29,7 +30,7 @@ submenu li a {
 }
 
 submenu li a:hover {
-	background: #EAF0FF;
+	background: #F0F2F4;
 	color: #0090FF;
 }
 
