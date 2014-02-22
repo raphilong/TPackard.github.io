@@ -66,6 +66,10 @@ body {
 	padding: 0px;
 }
 
+a {
+   outline: 0;
+}
+
 header {
 	float: top;
 	text-align: center;
@@ -110,7 +114,7 @@ a.content:link, a.content:visited {
 	transition:.5s;
 }
 
-a.content:hover {
+a.content:hover, a.content:active {
 	color:#FFFFFF;
 	background-color: #0090FF;
 	border: 2px solid #0090FF;
@@ -124,7 +128,7 @@ a.content:hover {
 	-webkit-transition: color .4s ease-out, background-color .6s ease-in, border-color .6s ease-in;
 	transition: color .4s ease-out, background-color .6s ease-in, border-color .6s ease-in;
 }
-a.content:active {
+/*a.content:active {
 	color:#444444;
 	background-color: #0090FF;
 	border: 2px solid #0090FF;
@@ -137,7 +141,7 @@ a.content:active {
 	-moz-transition:0s;
 	-webkit-transition:0s;
 	transition:0s;
-}
+}*/
 
 .content {
 	margin-top: 5px;
@@ -194,7 +198,7 @@ nav > a:link, nav > a:visited {
 	transition:.5s;
 }
 
-nav > a:hover {
+nav > a:hover, nav > a:active {
 	color:#DDDDDD;
 	text-decoration:none;
 	font-weight: 400;
@@ -204,7 +208,7 @@ nav > a:hover {
 	-webkit-transition:.5s;
 	transition:.5s;
 }
-nav > a:active {
+/*nav > a:active {
 	color:#444444;
 	text-decoration:none;
 	font-weight: 400;
@@ -214,7 +218,7 @@ nav > a:active {
 	-moz-transition:.2s;
 	-webkit-transition:.2s;
 	transition:.2s;
-}
+}*/
 
 footer {
 	text-align: center;
