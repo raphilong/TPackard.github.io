@@ -5,28 +5,28 @@ canvas.height = 480;
 var ctx = canvas.getContext("2d");
 
 /*GAME FUNCTIONS AND OBJECTS*/
-var precanvas = document.getElementById("precanvas");
-precanvas.style.width = String(canvas.width) + "px";
-precanvas.style.background = "#EEEEEE";
+var scrollX = 0;
+var scrollY = 0;
+var worldWidth = 960;
+worldHeight = 480;
+
+var paused = true;
 
 var entities = new Array();
 var platforms = new Array();
-var player = new Entity("Person.png", 400, 250, 200, 13, 32, platforms, 6);
+var player = new Entity("Person.png", 480, 250, 200, 13, 32, platforms, 6);
 entities.push(player);
 
-platforms.push(new Platform(15, 13, 20, 1));
-platforms.push(new Platform(0, 18, 15, 1));
-platforms.push(new Platform(35, 18, 15, 1));
-platforms.push(new Platform(15, 23, 20, 1));
-platforms.push(new Platform(0, 28, 14, 1));
-platforms.push(new Platform(0, 29, 23, 1));
-platforms.push(new Platform(36, 28, 14, 1));
-platforms.push(new Platform(27, 29, 23, 1));
+platforms.push(new Platform(18, 13, 24, 1));
+platforms.push(new Platform(0, 18, 18, 1));
+platforms.push(new Platform(42, 18, 18, 1));
+platforms.push(new Platform(18, 23, 24, 1));
+platforms.push(new Platform(0, 28, 18, 1));
+platforms.push(new Platform(0, 29, 27, 1));
+platforms.push(new Platform(42, 28, 18, 1));
+platforms.push(new Platform(33, 29, 27, 1));
 
 var keysDown = new Array();
-function resetKeys() {
-    keysDown = new Array();
-}
 
 document.onkeydown = function(e) {
     keysDown[e.keyCode] = true;
@@ -69,27 +69,50 @@ function update(delta) {
     }
 }
 
+function scroll() {
+    if (player.alive) {
+    	var prevScrollX = scrollX;
+		scrollX = Math.round(player.getX() - canvas.width / 2);
+		if (scrollX < 0) scrollX = 0;
+		if (scrollX > worldWidth - canvas.width) scrollX = worldWidth - canvas.width;
+		// Smooth scrolling! (Most of the time)
+		if (scrollX - prevScrollX > 3 && !player.moving) scrollX = prevScrollX + 3;
+		if (scrollX - prevScrollX < -3 && !player.moving) scrollX = prevScrollX - 3;
+
+		var prevScrollY = scrollY;
+		scrollY = Math.round(player.getY() - canvas.height / 2);
+		if (scrollY < 0) scrollY = 0;
+		if (scrollY > worldHeight - canvas.height) scrollY = worldHeight - canvas.height;
+		if (scrollY - prevScrollY > 3 && !player.moving) scrollY = prevScrollY + 3;
+		if (scrollY - prevScrollY < -3 && !player.moving) scrollY = prevScrollY - 3;
+    }
+}
+
 function paint() {
     ctx.fillStyle = "#EEEEEE";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     platforms.forEach(function(platform) {platform.draw(ctx)});
     entities.forEach(function(entity) {entity.draw(ctx)});
-    precanvas.innerHTML = "Score: " + player.score;
+    if (canvas.className == "visible") precanvas.innerHTML = "Score: " + player.score;
+    else precanvas.innerHTML = "<br>";
 }
 
 function main() {
     var now = Date.now();
     var delta = now - then;
 
-    update(delta / 1000);
-    paint();
-
-    if (now - lastSwitch >= 64) { // 16 times per second
-        for (var i = 0; i < entities.length; i++) entities[i].moving ? entities[i].nextFrame() : entities[i].setFrame(0);
-        lastSwitch = now;
+    if (!paused) {
+    	update(delta / 1000);
+        scroll();
+        paint();
+    
+        if (now - lastSwitch >= 64) { // 16 times per second
+            for (var i = 0; i < entities.length; i++) entities[i].moving ? entities[i].nextFrame() : entities[i].setFrame(0);
+            lastSwitch = now;
+        }
+    
+        if (Math.random() < 0.005 && entities.length < 10) entities.push(new AI("AI.png", 400, 174, 125, 13, 32, platforms, 6));
     }
-
-    if (Math.random() < 0.005 && entities.length < 10) entities.push(new AI("AI.png", 400, 174, 125, 13, 32, platforms, 6));
 
     then = now;
     setTimeout(main, 1);

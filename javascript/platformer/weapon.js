@@ -19,5 +19,5 @@ Projectile.prototype.update = function(delta) {
 
 Projectile.prototype.draw = function(context) {
 	context.fillStyle = "#444444";
-	context.fillRect(this.getX(), this.getY(), 4, 2);
+	context.fillRect(this.getX() - scrollX, this.getY() - scrollY, 4, 2);
 }

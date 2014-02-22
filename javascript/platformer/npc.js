@@ -16,7 +16,7 @@ AI.prototype.update = function(delta) {
         if (this.direction == LEFT && !this.canMove(LEFT)) {
             this.direction = RIGHT;
         }
-        if (this.y >= canvas.height - this.height) this.respawn();
+        if (this.y >= worldHeight - this.height) this.respawn();
         this.move(this.direction, delta);
     } else {
         this.x = -1000;

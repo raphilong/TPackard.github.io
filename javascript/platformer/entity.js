@@ -59,6 +59,7 @@ Entity.prototype.getY = function() {
 }
 
 Entity.prototype.move = function(direction, delta) {
+    this.moving = false;
     if (direction == UP && this.canJump) {
         this.jumping = true;
         this.canJump = false;
@@ -119,8 +120,8 @@ Entity.prototype.canMove = function(direction, delta) {
     /*DOWN*/
     if (direction == DOWN) {
         if (change != 0) this.prevY = this.getY();
-        if (this.getY() >= canvas.height - this.height) {
-            this.y = canvas.height - this.height;
+        if (this.getY() >= worldHeight - this.height) {
+            this.y = worldHeight - this.height;
             return false;
         }
         for (var i = 0; i < this.platforms.length; i++) {
@@ -152,8 +153,8 @@ Entity.prototype.canMove = function(direction, delta) {
     
     /*RIGHT*/
     if (direction == RIGHT) {
-        if (this.getX() >= canvas.width - this.width) {
-            if (this.getX() > canvas.width - this.width) this.x = canvas.width - this.width;
+        if (this.getX() >= worldWidth - this.width) {
+            if (this.getX() > worldWidth - this.width) this.x = worldWidth - this.width;
             return false;
         }
         for (var i = 0; i < this.platforms.length; i++) {
@@ -185,7 +186,7 @@ Entity.prototype.checkOnGround = function() {
 }
 
 Entity.prototype.gravitate = function(delta) {
-    if (this.getY() < canvas.height - this.height && this.gravity && !this.onGround) {
+    if (this.getY() < worldHeight - this.height && this.gravity && !this.onGround) {
         this.canJump = false;
         if (this.gravityPoint + delta * 25 < this.terminalVelocity) {
             this.y += -(this.gravityPoint - 20) * this.gravityPoint;
@@ -194,8 +195,8 @@ Entity.prototype.gravitate = function(delta) {
         } else this.y += this.terminalVelocity * 25 * delta;
         this.currentFrame = 1;
     }
-    if (this.getY() >= canvas.height - this.height) {
-        this.y = canvas.height - this.height;
+    if (this.getY() >= worldHeight - this.height) {
+        this.y = worldHeight - this.height;
         if (!(UP_ARROW in keysDown) && !(W in keysDown)) this.canJump = true;
         this.gravityPoint = 10;
     }
@@ -212,7 +213,7 @@ Entity.prototype.update = function(delta) {
     for (var i = 0; i < this.projectiles.length; i++) {
         var projectile = this.projectiles[i];
         projectile.update(delta);
-        if (projectile.x < -10 || projectile.x > canvas.width + 10) {
+        if (projectile.x < -10 || projectile.x > worldWidth + 10) {
             this.projectiles.splice(i, 1);
             i--;
         }
@@ -234,7 +235,7 @@ Entity.prototype.respawn = function() {
     this.projectiles = new Array();
     this.canJump = true;
     this.score = 0;
-    resetKeys();
+    keysDown = new Array();
 }
 
 Entity.prototype.checkAlive = function(entity) {
@@ -247,5 +248,5 @@ Entity.prototype.checkAlive = function(entity) {
 Entity.prototype.draw = function(context) {
     this.projectiles.forEach(function(projectile) {projectile.draw(ctx)});
     var offset = this.direction == RIGHT ? this.height + 1 : 0;
-    context.drawImage(this.image, (this.currentFrame * this.width + this.currentFrame), offset, this.width, this.height, this.getX(), this.getY(), this.width, this.height);
+    context.drawImage(this.image, (this.currentFrame * this.width + this.currentFrame), offset, this.width, this.height, this.getX() - scrollX, this.getY() - scrollY, this.width, this.height);
 }

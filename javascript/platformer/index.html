@@ -13,13 +13,7 @@
 		<script src="/js/setCSS.js"></script>
 		<noscript><link href="/css/light.css" rel="stylesheet" type="text/css"></noscript>
 		<link href="/javascript/javascript.css" rel="stylesheet" type="text/css">
-
-		<!--Game JS-->
-		<script src="constants.js"></script>
-        <script src="entity.js"></script>
-        <script src="platform.js"></script>
-        <script src="npc.js"></script>
-        <script src="weapon.js"></script>
+		<link href="/css/menu.css" rel="stylesheet" type="text/css">
     </head>
     
     <body>
@@ -32,12 +26,23 @@
 			<a href="/java">Code</a>
 			<a href="/pixels">Pixels</a>
 		</nav>
+		<submenu>
+			<ul id="submenu_ul" style="margin-left: -150px">
+				<li><a href="/java">Java</a></li>
+				<li><a href="/javascript" class="selected">JavaScript</a></li>
+				<li><a href="/code/tutorials">Tutorials</a></li>
+			</ul>
+		</submenu>
 		<br>
 		<center>
-		<div id="precanvas"></div>
+		<div id="precanvas" class="visible"><br></div>
         <div>
-           	<canvas id = "canvas">Your browser is deprecated. Get <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a>, the only browser with the latest version of javascript.</canvas>
+           	<canvas id = "canvas" class="hidden">Your browser is deprecated. Get <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a>, the only browser with the latest version of javascript.</canvas>
+           	<div id="gui" class="visible">
+           		<a id="start" class="visible" onclick="start()"></a>
+           	</div>
         </div>
+        <div id="postcanvas" class="hidden"></div>
         </center>
         <div class="content">
         	<br>
@@ -47,6 +52,12 @@
            	What is an objective?
         </div>
         <footer>&copy; 2014 Tyler Packard. <a href="/policies/privacy">Privacy Policy</a></footer>
+        <script src="constants.js"></script>
+        <script src="entity.js"></script>
+        <script src="platform.js"></script>
+        <script src="npc.js"></script>
+        <script src="weapon.js"></script>
         <script src="game.js"></script>
+        <script src="gui.js"></script>
     </body>
 </html>
