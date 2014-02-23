@@ -62,3 +62,12 @@ canvas {
 	-webkit-transition:.5s;
 	transition:.5s;
 }
+
+#start:active {
+	background: #00FF90;
+	-o-transition:.1s;
+	-ms-transition:.1s;
+	-moz-transition:.1s;
+	-webkit-transition:.1s;
+	transition:.1s;
+}

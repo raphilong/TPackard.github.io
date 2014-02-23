@@ -5,6 +5,8 @@ canvas.height = 480;
 var ctx = canvas.getContext("2d");
 
 /*GAME FUNCTIONS AND OBJECTS*/
+var cookies = new Cookies();
+
 var scrollX = 0;
 var scrollY = 0;
 var worldWidth = 960;
@@ -29,6 +31,7 @@ platforms.push(new Platform(33, 29, 27, 1));
 var keysDown = new Array();
 
 document.onkeydown = function(e) {
+	if (e.keyCode == P && !(P in keysDown)) paused = !paused;
     keysDown[e.keyCode] = true;
     if (e.keyCode == SPACE || e.keyCode == UP_ARROW || e.keyCode == DOWN_ARROW || e.keyCode == LEFT_ARROW || e.keyCode == RIGHT_ARROW) e.preventDefault(); // Prevents the page from scrolling when the arrow keys or spacebar are pressed
 };
@@ -93,7 +96,11 @@ function paint() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     platforms.forEach(function(platform) {platform.draw(ctx)});
     entities.forEach(function(entity) {entity.draw(ctx)});
-    if (canvas.className == "visible") precanvas.innerHTML = "Score: " + player.score;
+    if (canvas.className == "visible") {
+    	if (cookies.get("score") < player.score) cookies.set("score", player.score, Infinity);
+    	scoreBoard.innerHTML = "Score: " + player.score;
+    	highscoreBoard.innerHTML = "Highscore: " + cookies.get("score");
+    }
     else precanvas.innerHTML = "<br>";
 }
 

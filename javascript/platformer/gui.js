@@ -19,6 +19,16 @@ gui.style.width = String(canvas.width) + "px";
 gui.style.height = String(canvas.height) + "px";
 gui.style.background = precanvas.style.background;
 
+var scoreBoard = document.getElementById("score");
+scoreBoard.style.cssFloat = "left";
+scoreBoard.style.styleFloat = "left";
+scoreBoard.style.paddingLeft = "15px";
+
+var highscoreBoard = document.getElementById("highscore");
+highscoreBoard.style.cssFloat = "right";
+highscoreBoard.style.styleFloat = "right";
+highscoreBoard.style.paddingRight = "15px";
+
 /*START BUTTON*/
 var startButton = document.getElementById("start");
 startButton.style.marginTop = String(canvas.height / 2 - 100) + "px";
