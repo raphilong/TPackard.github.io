@@ -1,22 +1,27 @@
 /*CANVAS*/
 var canvas = document.getElementById("canvas");
-canvas.width = 800;
-canvas.height = 480;
+canvas.width = 800 * DPI;
+canvas.height = 480 * DPI;
+canvas.style.width = "800px";
+canvas.style.height = "480px";
 var ctx = canvas.getContext("2d");
 
 /*GAME FUNCTIONS AND OBJECTS*/
 var cookies = new Cookies();
+if (!cookies.contains("highscore")) {
+	cookies.set("highscore", 0, Infinity);
+}
 
 var scrollX = 0;
 var scrollY = 0;
 var worldWidth = 960;
 worldHeight = 480;
 
-var paused = true;
+var paused = false;
 
 var entities = new Array();
 var platforms = new Array();
-var player = new Entity("Person.png", 480, 250, 200, 13, 32, platforms, 6);
+var player = new Entity("Person", 480, 250, 200, 13, 32, platforms, 6);
 entities.push(player);
 
 platforms.push(new Platform(18, 13, 24, 1));
@@ -31,9 +36,20 @@ platforms.push(new Platform(33, 29, 27, 1));
 var keysDown = new Array();
 
 document.onkeydown = function(e) {
-	if (e.keyCode == P && !(P in keysDown)) paused = !paused;
+	if (e.keyCode == P && !(P in keysDown)) {
+		paused = !paused;
+		if (paused) {
+			ctx.fillStyle = "rgba(96, 96, 108, 0.4)";
+    		ctx.fillRect(0, 0, canvas.width, canvas.height);
+    		ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+    		ctx.font = String(128 * DPI) + "px Open Sans Bold";
+    		ctx.fillText("P", canvas.width / 2 - (43 * DPI), canvas.height / 2 + (43 * DPI));
+		}
+	}
     keysDown[e.keyCode] = true;
-    if (e.keyCode == SPACE || e.keyCode == UP_ARROW || e.keyCode == DOWN_ARROW || e.keyCode == LEFT_ARROW || e.keyCode == RIGHT_ARROW) e.preventDefault(); // Prevents the page from scrolling when the arrow keys or spacebar are pressed
+    if (e.keyCode == SPACE || e.keyCode == UP_ARROW || e.keyCode == DOWN_ARROW || e.keyCode == LEFT_ARROW || e.keyCode == RIGHT_ARROW) {
+    	e.preventDefault(); // Prevents the page from scrolling when the arrow keys or spacebar are pressed
+	}
 };
 
 document.onkeyup = function(e) {
@@ -75,17 +91,17 @@ function update(delta) {
 function scroll() {
     if (player.alive) {
     	var prevScrollX = scrollX;
-		scrollX = Math.round(player.getX() - canvas.width / 2);
+		scrollX = Math.round(player.getX() - canvas.width / (2 * DPI));
 		if (scrollX < 0) scrollX = 0;
-		if (scrollX > worldWidth - canvas.width) scrollX = worldWidth - canvas.width;
+		if (scrollX > worldWidth - canvas.width / DPI) scrollX = worldWidth - canvas.width / DPI;
 		// Smooth scrolling! (Most of the time)
 		if (scrollX - prevScrollX > 3 && !player.moving) scrollX = prevScrollX + 3;
 		if (scrollX - prevScrollX < -3 && !player.moving) scrollX = prevScrollX - 3;
 
 		var prevScrollY = scrollY;
-		scrollY = Math.round(player.getY() - canvas.height / 2);
+		scrollY = Math.round(player.getY() - canvas.height / (2 * DPI));
 		if (scrollY < 0) scrollY = 0;
-		if (scrollY > worldHeight - canvas.height) scrollY = worldHeight - canvas.height;
+		if (scrollY > worldHeight - canvas.height / DPI) scrollY = worldHeight - canvas.height / DPI;
 		if (scrollY - prevScrollY > 3 && !player.moving) scrollY = prevScrollY + 3;
 		if (scrollY - prevScrollY < -3 && !player.moving) scrollY = prevScrollY - 3;
     }
@@ -96,12 +112,11 @@ function paint() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     platforms.forEach(function(platform) {platform.draw(ctx)});
     entities.forEach(function(entity) {entity.draw(ctx)});
-    if (canvas.className == "visible") {
-    	if (cookies.get("score") < player.score) cookies.set("score", player.score, Infinity);
-    	scoreBoard.innerHTML = "Score: " + player.score;
-    	highscoreBoard.innerHTML = "Highscore: " + cookies.get("score");
-    }
-    else precanvas.innerHTML = "<br>";
+    if (cookies.get("highscore") < player.score) cookies.set("highscore", player.score, Infinity);
+    ctx.fillStyle = "#444444";
+    ctx.font = String(12 * DPI) + "pt Open Sans";
+    ctx.fillText("Score: " + player.score, 24 * DPI, 32 * DPI);
+    ctx.fillText("Highscore: " + cookies.get("highscore"), 24 * DPI, 64 * DPI);
 }
 
 function main() {
@@ -118,7 +133,7 @@ function main() {
             lastSwitch = now;
         }
     
-        if (Math.random() < 0.005 && entities.length < 10) entities.push(new AI("AI.png", 400, 174, 125, 13, 32, platforms, 6));
+        if (Math.random() < 0.005 && entities.length < 10) entities.push(new AI("AI", 400, 174, 125, 13, 32, platforms, 6));
     }
 
     then = now;

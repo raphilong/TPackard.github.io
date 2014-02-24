@@ -26,7 +26,13 @@
 		</nav>
 		<div class="content">
             <br><br><br>
-			<center><img src="/images/celica.jpeg"></center>
+			<center><img src="/images/celica.jpg" width="800px" id="front-image"></center>
+			<script>
+				var image = document.getElementById("front-image");
+				if (Math.random() > 0.5) {
+					image.src = "http://s7d5.scene7.com/is/image/NB/mmd500b3_nb_14_i";
+				}
+			</script>
 		</div>
 		<footer>&copy; 2014 Tyler Packard. <a href="/policies/privacy">Privacy Policy</a></footer>
 	</body>

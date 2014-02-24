@@ -2,7 +2,7 @@
 function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim) {
     /*VARIABLES*/
     this.image = new Image();
-    this.image.src = imgSrc;
+    this.image.src = imgSrc + imgExt + ".png";
 
     this.x = x || 0;
     this.y = y || 0;
@@ -248,5 +248,5 @@ Entity.prototype.checkAlive = function(entity) {
 Entity.prototype.draw = function(context) {
     this.projectiles.forEach(function(projectile) {projectile.draw(ctx)});
     var offset = this.direction == RIGHT ? this.height + 1 : 0;
-    context.drawImage(this.image, (this.currentFrame * this.width + this.currentFrame), offset, this.width, this.height, this.getX() - scrollX, this.getY() - scrollY, this.width, this.height);
+    context.drawImage(this.image, (this.currentFrame * this.width + this.currentFrame) * DPI, offset * DPI, this.width * DPI, this.height * DPI, (this.getX() - scrollX) * DPI, (this.getY() - scrollY) * DPI, this.width * DPI, this.height * DPI);
 }

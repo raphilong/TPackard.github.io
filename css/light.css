@@ -19,15 +19,15 @@
   src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/MTP_ySUJH_bn48VBG8sNSqRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
 }
 @font-face {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans Bold';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
 }
 @font-face {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans Extrabold';
   font-style: normal;
-  font-weight: 800;
+  font-weight: 400;
   src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/EInbV5DfGHOiMmvb1Xr-hqRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
 }
 @font-face {
@@ -155,6 +155,14 @@ a.content:hover, a.content:active {
 	margin-bottom: 25px;
 }
 
+.article-stub > a.link {
+	color: #646464;
+}
+
+.article-stub > a.link:hover {
+	color: #0090FF;
+}
+
 .unimportant {
 	color: #BBBBBB;
 }
@@ -244,7 +252,6 @@ footer > a:hover, footer > a:active {
 
 a.blank {
 	text-decoration: none;
-	color: inherit;
 }
 
 span.code {
@@ -254,4 +261,14 @@ span.code {
 	padding-left: 2px;
 	padding-right: 2px;
 	border-radius: 4px;
+}
+
+div.article-link {
+	display: inline-block;
+	padding: 4px 8px 6px 8px;
+	color: #888888;
+}
+
+div.article-link:hover {
+	background: #F2F2F2;
 }

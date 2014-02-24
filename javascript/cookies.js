@@ -10,6 +10,13 @@ Cookies.prototype.valueIndex = function(name) {
 	return -1;
 }
 
+Cookies.prototype.contains = function(name) {
+	if (this.valueIndex(name) == -1) {
+		return false;
+	}
+	return true;
+}
+
 Cookies.prototype.get = function(name) {
 	var begin = document.cookie.indexOf(name + "=");
 	if (begin != -1) {
