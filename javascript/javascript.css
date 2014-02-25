@@ -75,12 +75,12 @@ canvas {
 .left-arrow {
 	display: inline-block;
 	margin-top: 20px;
-	margin-right: 64px;
+	margin-right: 128px;
 	width: 0; 
 	height: 0; 
-	border-top: 32px solid transparent;
-	border-bottom: 32px solid transparent; 
-	border-right:32px solid #0090FF; 
+	border-top: 64px solid transparent;
+	border-bottom: 64px solid transparent; 
+	border-right:64px solid #0090FF; 
 	font-size: 0;
 	line-height: 0;
 	-webkit-user-select: none;
@@ -94,12 +94,12 @@ canvas {
 .right-arrow {
 	display: inline-block;
 	margin-top: 20px;
-	margin-right: 64px;
+	margin-right: 128px;
 	width: 0; 
 	height: 0; 
-	border-top: 32px solid transparent;
-	border-bottom: 32px solid transparent; 
-	border-left:32px solid #0090FF; 
+	border-top: 64px solid transparent;
+	border-bottom: 64px solid transparent; 
+	border-left:64px solid #0090FF; 
 	font-size: 0;
 	line-height: 0;
 	-webkit-user-select: none;
@@ -112,13 +112,13 @@ canvas {
 
 .up-arrow {
 	display: inline-block;
-	margin-bottom: 16px;
-	margin-right: 64px;
+	margin-bottom: 32px;
+	margin-right: 128px;
 	width: 0; 
 	height: 0; 
-	border-left: 32px solid transparent;
-	border-right: 32px solid transparent; 
-	border-bottom:32px solid #0090FF; 
+	border-left: 64px solid transparent;
+	border-right: 64px solid transparent; 
+	border-bottom:64px solid #0090FF; 
 	font-size: 0;
 	line-height: 0;
 	-webkit-user-select: none;
@@ -131,10 +131,10 @@ canvas {
 
 .circle {
 	display: inline-block;
-	width: 64px;
-	height: 64px;
+	width: 128px;
+	height: 128px;
 	border-radius: 50%;
-	line-height: 64px;
+	line-height: 128px;
 	background: #0090FF;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
