@@ -75,7 +75,6 @@ function update(delta) {
     });
     if (SPACE in keysDown || buttonsDown[SPACE]) {
         player.shoot();
-        delete buttonsDown[SPACE];
     }
     if (UP_ARROW in keysDown || W in keysDown || buttonsDown[UP]) {
         player.move(UP, delta);

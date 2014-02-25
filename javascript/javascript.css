@@ -83,6 +83,12 @@ canvas {
 	border-right:32px solid #0090FF; 
 	font-size: 0;
 	line-height: 0;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
 }
 
 .right-arrow {
@@ -96,6 +102,12 @@ canvas {
 	border-left:32px solid #0090FF; 
 	font-size: 0;
 	line-height: 0;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
 }
 
 .up-arrow {
@@ -109,6 +121,12 @@ canvas {
 	border-bottom:32px solid #0090FF; 
 	font-size: 0;
 	line-height: 0;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
 }
 
 .circle {
@@ -118,4 +136,10 @@ canvas {
 	border-radius: 50%;
 	line-height: 64px;
 	background: #0090FF;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
 }

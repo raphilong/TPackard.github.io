@@ -21,7 +21,6 @@ function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAni
     this.moving = false;
     this.jumping = false;
     this.canJump = true;
-    this.canShoot = true;
     this.jumpOffset = 0;
     this.jumpPoint = 0;
     this.gravity = true;
@@ -37,6 +36,7 @@ function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAni
     this.respawnX = this.x;
     this.respawnY = this.y;
     this.score = 0;
+    this.lastShot = Date.now();
 }
 
 /*ENTITY FUNCTIONS*/
@@ -203,9 +203,9 @@ Entity.prototype.gravitate = function(delta) {
 }
 
 Entity.prototype.shoot = function() {
-    if (this.canShoot) {
-        this.canShoot = false;
+    if (Date.now() - this.lastShot >= 100) {
         this.projectiles.push(new Projectile(this));
+        this.lastShot = Date.now();
     }
 }
 
@@ -218,9 +218,7 @@ Entity.prototype.update = function(delta) {
             i--;
         }
     }
-    if (this.alive) {
-        if (!(SPACE in keysDown)) this.canShoot = true;
-    } else {
+    if (!this.alive) {
         this.x = -1000;
         if (this.timeSinceDeath < 1) this.timeSinceDeath += delta;
         else this.respawn();
