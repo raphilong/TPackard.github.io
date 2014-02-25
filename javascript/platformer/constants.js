@@ -16,7 +16,8 @@ const S = 83;
 const D = 68;
 const P = 80;
 
-const DPI = window.devicePixelRatio;
+var DPI = window.devicePixelRatio;
+if (DPI != 2) DPI = 1;
 var imgExt = "";
 if (DPI == 2) imgExt = "@2x";
 
