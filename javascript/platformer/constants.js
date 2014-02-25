@@ -19,3 +19,8 @@ const P = 80;
 const DPI = window.devicePixelRatio;
 var imgExt = "";
 if (DPI == 2) imgExt = "@2x";
+
+var touch = false;
+if ("ontouchstart" in window) { 
+	touch = true;
+}

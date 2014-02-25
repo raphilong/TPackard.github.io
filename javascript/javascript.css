@@ -71,3 +71,51 @@ canvas {
 	-webkit-transition:.1s;
 	transition:.1s;
 }
+
+.left-arrow {
+	display: inline-block;
+	margin-top: 20px;
+	margin-right: 64px;
+	width: 0; 
+	height: 0; 
+	border-top: 32px solid transparent;
+	border-bottom: 32px solid transparent; 
+	border-right:32px solid #0090FF; 
+	font-size: 0;
+	line-height: 0;
+}
+
+.right-arrow {
+	display: inline-block;
+	margin-top: 20px;
+	margin-right: 64px;
+	width: 0; 
+	height: 0; 
+	border-top: 32px solid transparent;
+	border-bottom: 32px solid transparent; 
+	border-left:32px solid #0090FF; 
+	font-size: 0;
+	line-height: 0;
+}
+
+.up-arrow {
+	display: inline-block;
+	margin-bottom: 16px;
+	margin-right: 64px;
+	width: 0; 
+	height: 0; 
+	border-left: 32px solid transparent;
+	border-right: 32px solid transparent; 
+	border-bottom:32px solid #0090FF; 
+	font-size: 0;
+	line-height: 0;
+}
+
+.circle {
+	display: inline-block;
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	line-height: 64px;
+	background: #0090FF;
+}

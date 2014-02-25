@@ -56,6 +56,16 @@ document.onkeyup = function(e) {
     delete keysDown[e.keyCode];
 };
 
+/*MOBILE BUTTONS*/
+if (touch) {
+	document.getElementById("buttons").className = "visible";
+}
+var buttonsDown = new Array();
+
+function button(direction, state) {
+	buttonsDown[direction] = state;
+}
+
 function update(delta) {
     entities.forEach(function(entity) {
         entity.moving = false;
@@ -63,19 +73,20 @@ function update(delta) {
         entity.update(delta);
         entities.forEach(function(otherEntity) {entity.checkAlive(otherEntity)});
     });
-    if (SPACE in keysDown) {
+    if (SPACE in keysDown || buttonsDown[SPACE]) {
         player.shoot();
+        delete buttonsDown[SPACE];
     }
-    if (UP_ARROW in keysDown || W in keysDown) {
+    if (UP_ARROW in keysDown || W in keysDown || buttonsDown[UP]) {
         player.move(UP, delta);
     }
-    if (DOWN_ARROW in keysDown || S in keysDown) {
+    if (DOWN_ARROW in keysDown || S in keysDown || buttonsDown[DOWN]) {
         player.move(DOWN, delta);
     }
-    if (LEFT_ARROW in keysDown || A in keysDown) {
+    if (LEFT_ARROW in keysDown || A in keysDown || buttonsDown[LEFT]) {
         player.move(LEFT, delta);
     }
-    if (RIGHT_ARROW in keysDown || D in keysDown) {
+    if (RIGHT_ARROW in keysDown || D in keysDown || buttonsDown[RIGHT]) {
         player.move(RIGHT, delta);
     }
     for (var i = 0; i < entities.length; i++) {

@@ -36,6 +36,13 @@
 		<br>
 		<center>
            	<canvas id = "canvas">Your browser is deprecated. Get <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a>, the only browser with the latest version of javascript.</canvas>
+           	<br>
+           	<div id="buttons" class="hidden">
+           		<a onmousedown="button(LEFT, true);" onmouseup="button(LEFT, false);" class="left-arrow"></a>
+           		<a onmousedown="button(RIGHT, true);" onmouseup="button(RIGHT, false);" class="right-arrow"></a>
+           		<a onmousedown="button(UP, true);" onmouseup="button(UP, false);" class="up-arrow"></a>
+           		<a onmousedown="button(SPACE, true);" onmouseup="button(SPACE, false);"><div class="circle"></div></a>
+           	</div>
         </center>
         <div class="content">
         	<br>
