@@ -36,7 +36,10 @@ function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAni
     this.respawnX = this.x;
     this.respawnY = this.y;
     this.score = 0;
-    this.lastShot = Date.now();
+    this.lastShot = 0;
+    this.maxHealth = 5;
+    this.health = 5;
+    this.lastHurt = 0;
 }
 
 /*ENTITY FUNCTIONS*/
@@ -203,7 +206,7 @@ Entity.prototype.gravitate = function(delta) {
 }
 
 Entity.prototype.shoot = function() {
-    if (Date.now() - this.lastShot >= 100) {
+    if (Date.now() - this.lastShot >= 250) {
         this.projectiles.push(new Projectile(this));
         this.lastShot = Date.now();
     }
@@ -234,17 +237,25 @@ Entity.prototype.respawn = function() {
     this.canJump = true;
     this.score = 0;
     keysDown = new Array();
+    this.health = this.maxHealth;
+    this.lastHurt = Date.now();
 }
 
 Entity.prototype.checkAlive = function(entity) {
-        if (entity != this && entity.x > this.x && entity.x < this.x + this.width && entity.y + entity.height > this.y && entity.y < this.y + this.height) {
-            this.alive = false;
-            this.x = -1000;
-        }
+    if (Date.now() - this.lastHurt >= 2000 && entity != this && entity.x + entity.width > this.x && entity.x < this.x + this.width && entity.y + entity.height > this.y && entity.y < this.y + this.height) {
+        this.health--;
+        this.lastHurt = Date.now();
+    }
+    if (this.health <= 0) {
+        this.alive = false;
+        this.x = -1000;
+    }
 }
 
 Entity.prototype.draw = function(context) {
     this.projectiles.forEach(function(projectile) {projectile.draw(ctx)});
-    var offset = this.direction == RIGHT ? this.height + 1 : 0;
-    context.drawImage(this.image, (this.currentFrame * this.width + this.currentFrame) * DPI, offset * DPI, this.width * DPI, this.height * DPI, (this.getX() - scrollX) * DPI, (this.getY() - scrollY) * DPI, this.width * DPI, this.height * DPI);
+    if (Date.now() - this.lastHurt >= 2000 || Math.round(Date.now() / 200) % 2 == 0) {
+        var offset = this.direction == RIGHT ? this.height + 1 : 0;
+        context.drawImage(this.image, (this.currentFrame * this.width + this.currentFrame) * DPI, offset * DPI, this.width * DPI, this.height * DPI, (this.getX() - scrollX) * DPI, (this.getY() - scrollY) * DPI, this.width * DPI, this.height * DPI);
+    }
 }

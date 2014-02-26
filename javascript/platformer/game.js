@@ -24,6 +24,8 @@ var platforms = new Array();
 var player = new Entity("Person", 480, 250, 200, 13, 32, platforms, 6);
 entities.push(player);
 
+var healthbar = new StatusBar("healthbar", 380, 25, 41, 6);
+
 platforms.push(new Platform(18, 13, 24, 1));
 platforms.push(new Platform(0, 18, 18, 1));
 platforms.push(new Platform(42, 18, 18, 1));
@@ -96,6 +98,7 @@ function update(delta) {
             i--;
         }
     }
+    healthbar.update(player.health, player.maxHealth);
 }
 
 function scroll() {
@@ -122,11 +125,15 @@ function paint() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     platforms.forEach(function(platform) {platform.draw(ctx)});
     entities.forEach(function(entity) {entity.draw(ctx)});
+    healthbar.draw(ctx);
+
     if (cookies.get("highscore") < player.score) cookies.set("highscore", player.score, Infinity);
     ctx.fillStyle = "#444444";
     ctx.font = String(12 * DPI) + "pt Open Sans";
     ctx.fillText("Score: " + player.score, 24 * DPI, 32 * DPI);
     ctx.fillText("Highscore: " + cookies.get("highscore"), 24 * DPI, 64 * DPI);
+    ctx.font = String(8 * DPI) + "pt Open Sans";
+    ctx.fillText("HEALTH", 380 * DPI, 50 * DPI);
 }
 
 function main() {
