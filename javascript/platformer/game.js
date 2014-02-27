@@ -1,7 +1,7 @@
 /*CANVAS*/
 var canvas = document.getElementById("canvas");
-canvas.width = 800 * DPI;
-canvas.height = 480 * DPI;
+canvas.width = 800;
+canvas.height = 480;
 canvas.style.width = "800px";
 canvas.style.height = "480px";
 var ctx = canvas.getContext("2d");
@@ -21,7 +21,7 @@ var paused = false;
 
 var entities = new Array();
 var platforms = new Array();
-var player = new Entity("Person", 480, 250, 200, 13, 32, platforms, 6);
+var player = new Entity("Person", 480, 250, 120, 13, 32, platforms, 6);
 entities.push(player);
 
 var healthbar = new StatusBar("healthbar", 380, 25, 41, 6);
@@ -35,6 +35,8 @@ platforms.push(new Platform(0, 29, 27, 1));
 platforms.push(new Platform(42, 28, 18, 1));
 platforms.push(new Platform(33, 29, 27, 1));
 
+
+/*KEYBOARD*/
 var keysDown = new Array();
 
 document.onkeydown = function(e) {
@@ -57,6 +59,15 @@ document.onkeydown = function(e) {
 document.onkeyup = function(e) {
     delete keysDown[e.keyCode];
 };
+
+
+/*MOUSE*/
+canvas.onmousemove = function(e) {
+	var rect = canvas.getBoundingClientRect();
+	var mouseY = Math.round(e.clientY - rect.top);
+	var mouseX = Math.round(e.clientX - rect.left);
+};
+
 
 /*MOBILE BUTTONS*/
 if (touch) {
@@ -150,7 +161,7 @@ function main() {
             lastSwitch = now;
         }
     
-        if (Math.random() < 0.005 && entities.length < 10) entities.push(new AI("AI", 400, 174, 125, 13, 32, platforms, 6));
+        if (Math.random() < 0.005 && entities.length < 10) entities.push(new AI("AI", 480, 174, 200, 13, 32, platforms, 6));
     }
 
     then = now;
