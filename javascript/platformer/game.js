@@ -1,7 +1,7 @@
 /*CANVAS*/
 var canvas = document.getElementById("canvas");
-canvas.width = 800;
-canvas.height = 480;
+canvas.width = 800 * DPI;
+canvas.height = 480 * DPI;
 canvas.style.width = "800px";
 canvas.style.height = "480px";
 var ctx = canvas.getContext("2d");
