@@ -19,7 +19,8 @@
     <body>
 		<div>
 			<header>TYLER<span class="Thin">PACKARD</span></header>
-			<center><subheader><span class="spread">帕泰</span>乐</subheader></center>
+			<center><subheader id="subheader">THIS WEBSITE RELIES ON JAVASCRIPT TO WORK PROPERLY. PLEASE ENABLE IT OR UPDATE TO A <a href="http://www.mozilla.org/en-US/firefox/new/" class="link">MODERN BROWSER</a>.</subheader></center>
+			<script src="/js/subheader.js"></script>
 		</div>
 		<nav>
 			<a href="/">Home</a>
@@ -32,17 +33,7 @@
 				<li><a href="/javascript" class="selected">JavaScript</a></li>
 			</ul>
 		</submenu>
-		<br>
-		<center>
-           	<canvas id = "canvas">Your browser is deprecated. Get <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a>, the only browser with the latest version of javascript.</canvas>
-           	<br>
-           	<div id="buttons" class="hidden">
-           		<a ontouchstart="button(LEFT, true);" ontouchend="button(LEFT, false);" class="left-arrow"></a>
-           		<a ontouchstart="button(RIGHT, true);" ontouchend="button(RIGHT, false);" class="right-arrow"></a>
-           		<a ontouchstart="button(UP, true);" ontouchend="button(UP, false);" class="up-arrow"></a>
-           		<a ontouchstart="button(SPACE, true);" ontouchend="button(SPACE, false)"><div class="circle"></div></a>
-           	</div>
-        </center>
+		<script src="platformer.js"></script>
         <div class="content">
         	<br>
            	<h2>Controls</h2>
@@ -51,13 +42,5 @@
            	What is an objective?
         </div>
         <footer>&copy; 2014 Tyler Packard. <a href="/policies/privacy">Privacy Policy</a></footer>
-        <script src="/javascript/cookies.js"></script>
-        <script src="constants.js"></script>
-        <script src="entity.js"></script>
-        <script src="platform.js"></script>
-        <script src="npc.js"></script>
-        <script src="weapon.js"></script>
-        <script src="gui.js"></script>
-        <script src="game.js"></script>
     </body>
 </html>

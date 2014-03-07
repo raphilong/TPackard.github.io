@@ -1,10 +1,15 @@
 /*CANVAS*/
 var canvas = document.getElementById("canvas");
-canvas.width = 800 * DPI;
+canvas.width = 800 * DPI; // Multiplied by DPI for retina displays
 canvas.height = 480 * DPI;
 canvas.style.width = "800px";
 canvas.style.height = "480px";
 var ctx = canvas.getContext("2d");
+
+
+/*LOAD FONTS*/
+ctx.font = String(128 * DPI) + "px Open Sans Bold";
+
 
 /*GAME FUNCTIONS AND OBJECTS*/
 var cookies = new Cookies();
@@ -19,23 +24,6 @@ worldHeight = 480;
 
 var paused = false;
 
-var entities = new Array();
-var platforms = new Array();
-var player = new Entity("Person", 480, 250, 120, 13, 32, platforms, 6);
-entities.push(player);
-
-var healthbar = new StatusBar("healthbar", 380, 25, 41, 6);
-
-platforms.push(new Platform(18, 13, 24, 1));
-platforms.push(new Platform(0, 18, 18, 1));
-platforms.push(new Platform(42, 18, 18, 1));
-platforms.push(new Platform(18, 23, 24, 1));
-platforms.push(new Platform(0, 28, 18, 1));
-platforms.push(new Platform(0, 29, 27, 1));
-platforms.push(new Platform(42, 28, 18, 1));
-platforms.push(new Platform(33, 29, 27, 1));
-
-
 /*KEYBOARD*/
 var keysDown = new Array();
 
@@ -43,10 +31,10 @@ document.onkeydown = function(e) {
 	if (e.keyCode == P && !(P in keysDown)) {
 		paused = !paused;
 		if (paused) {
+			ctx.font = String(128 * DPI) + "px Open Sans Bold";
 			ctx.fillStyle = "rgba(96, 96, 108, 0.4)";
     		ctx.fillRect(0, 0, canvas.width, canvas.height);
     		ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-    		ctx.font = String(128 * DPI) + "px Open Sans Bold";
     		ctx.fillText("P", canvas.width / 2 - (43 * DPI), canvas.height / 2 + (43 * DPI));
 		}
 	}
@@ -79,29 +67,29 @@ function button(direction, state) {
 	buttonsDown[direction] = state;
 }
 
+var entities = new Array();
+var platforms = new Array();
+var player = new Player(480, 250, 140, platforms);
+entities.push(player);
+
+var healthbar = new StatusBar("healthbar", 380, 25, 41, 6);
+
+// Isn't there a better way to do this?
+platforms.push(new Platform(18, 13, 24, 1));
+platforms.push(new Platform(0, 18, 18, 1));
+platforms.push(new Platform(42, 18, 18, 1));
+platforms.push(new Platform(18, 23, 24, 1));
+platforms.push(new Platform(0, 28, 18, 1));
+platforms.push(new Platform(0, 29, 27, 1));
+platforms.push(new Platform(42, 28, 18, 1));
+platforms.push(new Platform(33, 29, 27, 1));
+
 function update(delta) {
-    entities.forEach(function(entity) {
-        entity.moving = false;
-        entity.gravitate(delta);
-        entity.update(delta);
-        entities.forEach(function(otherEntity) {entity.checkAlive(otherEntity)});
-    });
-    if (SPACE in keysDown || buttonsDown[SPACE]) {
-        player.shoot();
-    }
-    if (UP_ARROW in keysDown || W in keysDown || buttonsDown[UP]) {
-        player.move(UP, delta);
-    }
-    if (DOWN_ARROW in keysDown || S in keysDown || buttonsDown[DOWN]) {
-        player.move(DOWN, delta);
-    }
-    if (LEFT_ARROW in keysDown || A in keysDown || buttonsDown[LEFT]) {
-        player.move(LEFT, delta);
-    }
-    if (RIGHT_ARROW in keysDown || D in keysDown || buttonsDown[RIGHT]) {
-        player.move(RIGHT, delta);
-    }
     for (var i = 0; i < entities.length; i++) {
+    	entities[i].moving = false;
+        entities[i].gravitate(delta);
+        entities[i].update(delta);
+        entities.forEach(function(otherEntity) {entities[i].checkAlive(otherEntity);});
         entities[i].jump(delta);
         entities[i].checkOnGround();
         if (!entities[i].alive && entities[i] != player) {
@@ -132,14 +120,14 @@ function scroll() {
 }
 
 function paint() {
-    ctx.fillStyle = "#EEEEEE";
+    ctx.fillStyle = "#EEEEF2";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     platforms.forEach(function(platform) {platform.draw(ctx)});
     entities.forEach(function(entity) {entity.draw(ctx)});
     healthbar.draw(ctx);
 
     if (cookies.get("highscore") < player.score) cookies.set("highscore", player.score, Infinity);
-    ctx.fillStyle = "#444444";
+    ctx.fillStyle = "#444450";
     ctx.font = String(12 * DPI) + "pt Open Sans";
     ctx.fillText("Score: " + player.score, 24 * DPI, 32 * DPI);
     ctx.fillText("Highscore: " + cookies.get("highscore"), 24 * DPI, 64 * DPI);
@@ -156,12 +144,13 @@ function main() {
         scroll();
         paint();
     
-        if (now - lastSwitch >= 64) { // 16 times per second
-            for (var i = 0; i < entities.length; i++) entities[i].moving ? entities[i].nextFrame() : entities[i].setFrame(0);
-            lastSwitch = now;
+        for (var i = 0; i < entities.length; i++) {
+        	entities[i].animate();
         }
-    
-        if (Math.random() < 0.005 && entities.length < 10) entities.push(new AI("AI", 480, 174, 200, 13, 32, platforms, 6));
+
+        if (Math.random() < 0.01 && entities.length < 25) {
+        	entities.push(new AI("AI", 480, 174, 200, 13, 32, platforms, 6));
+        }
     }
 
     then = now;
@@ -169,6 +158,5 @@ function main() {
 }
 
 /*START GAME*/
-var lastSwitch = Date.now();
 var then = Date.now();
 main();

@@ -1,9 +1,7 @@
-function AI(imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim) {
-    Entity.call(this, imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim);
+function AI(imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim, health) {
+    Entity.call(this, imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim, health);
     if (Math.random() >= 0.5) this.direction = RIGHT;
     else this.direction = LEFT;
-    this.respawnX = this.x;
-    this.respawnY = this.y;
 }
 
 AI.prototype = new Entity;

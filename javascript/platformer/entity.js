@@ -1,12 +1,12 @@
 /*ENTITY DECLARATION*/
-function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim) {
+function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAnim, health) {
     /*VARIABLES*/
     this.image = new Image();
     this.image.src = imgSrc + imgExt + ".png";
 
     this.x = x || 0;
     this.y = y || 0;
-    this.speed = speed || 1;
+    this.speed = speed || 0;
 
     this.width = width || this.image.width;
     this.height = height || this.image.height;
@@ -15,6 +15,8 @@ function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAni
     this.numAnim = numAnim || 1;
 
     this.platforms = platforms || null;
+
+    this.health = health || 5;
 
     this.currentFrame = 0;
     this.direction = RIGHT;
@@ -38,8 +40,9 @@ function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAni
     this.score = 0;
     this.lastShot = 0;
     this.maxHealth = 5;
-    this.health = 5;
     this.lastHurt = 0;
+    this.lastFrameSwitch = Date.now();
+    this.frameWait = 64;
 }
 
 /*ENTITY FUNCTIONS*/
@@ -226,6 +229,10 @@ Entity.prototype.update = function(delta) {
         if (this.timeSinceDeath < 1) this.timeSinceDeath += delta;
         else this.respawn();
     }
+    if (Date.now() - this.lastFrameSwitch >= this.frameWait) {
+            this.moving ? this.nextFrame() : this.setFrame(0);
+            this.lastFrameSwitch = Date.now();
+    }
 }
 
 Entity.prototype.respawn = function() {
@@ -255,7 +262,19 @@ Entity.prototype.checkAlive = function(entity) {
 Entity.prototype.draw = function(context) {
     this.projectiles.forEach(function(projectile) {projectile.draw(ctx)});
     if (Date.now() - this.lastHurt >= 2000 || Math.round(Date.now() / 200) % 2 == 0) {
-        var offset = this.direction == RIGHT ? this.height + 1 : 0;
-        context.drawImage(this.image, (this.currentFrame * this.width + this.currentFrame) * DPI, offset * DPI, this.width * DPI, this.height * DPI, (this.getX() - scrollX) * DPI, (this.getY() - scrollY) * DPI, this.width * DPI, this.height * DPI);
+        if (this.direction == RIGHT) {
+            context.drawImage(this.image, (this.currentFrame * this.width + this.currentFrame) * DPI, 0, this.width * DPI, this.height * DPI, (this.getX() - scrollX) * DPI, (this.getY() - scrollY) * DPI, this.width * DPI, this.height * DPI);
+        }
+        if (this.direction == LEFT) {
+            var frameStart = ((this.width * this.numFrames + this.numFrames) - ((this.currentFrame + 1) * this.width + (this.currentFrame + 1))) * DPI;
+            context.drawImage(this.image, frameStart, (this.height + 1) * DPI, this.width * DPI, this.height * DPI, (this.getX() - scrollX) * DPI, (this.getY() - scrollY) * DPI, this.width * DPI, this.height * DPI);
+        }
+    }
+}
+
+Entity.prototype.animate = function() {
+    if (Date.now() - this.lastFrameSwitch >= this.frameWait) {
+            this.moving ? this.nextFrame() : this.setFrame(0);
+            this.lastFrameSwitch = Date.now();
     }
 }
