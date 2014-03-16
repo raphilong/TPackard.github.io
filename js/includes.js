@@ -18,22 +18,18 @@ var currentSection;
 function codeContent() {
 	var filer = new Filer();
 	var section = window.location.hash.substring(1);
-	if (section == "javascript") {
-		filer.include("/javascript/content.html", "content");
-	} else if (section == "java") {
-		filer.include("/java/content.html", "content");
-	} else {
-		filer.include("/java/content.html", "content");
-		section = "java";
-		window.location.hash = "#" + section;
+	filer.include("/" + section + "/content.html", "content");
+	if (section.indexOf("/") == -1) {
+		currentSection = section;
+		document.getElementById(section + "Button").className = "selected";
 	}
-	currentSection = section;
-	document.getElementById(section + "Button").className = "selected";
 }
 
 function setSection(section) {
-	document.getElementById(section + "Button").className = "selected";
-	document.getElementById(currentSection + "Button").className = "";
+	if (section.indexOf("/") == -1) {
+		document.getElementById(section + "Button").className = "selected";
+		document.getElementById(currentSection + "Button").className = "";
+	}
 	var filer = new Filer();
 	filer.include("/" + section + "/content.html", "content");
 	currentSection = section;

@@ -1,0 +1,60 @@
+/* Switch - Inspired by buttons on MDN */
+switch {
+	background-image: linear-gradient(#EFEFEF, #FFFFFF);
+	border: 0;
+	border-bottom: 2px solid #E8E8E8;
+	border-radius: 6px;
+	background-clip: padding-box;
+	box-shadow: 0 0 0 1px #D0D0D0;
+	color: #444444;
+	cursor: pointer;
+	display:inline-block;
+	font-family: "Open Sans";
+	font-size: 14px;
+	margin: 6px 0;
+	padding: 1px 8px 2px 8px;
+	text-align: center;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+}
+
+switch:hover {
+	background-image: linear-gradient(#EAEAEA, #FAFAFA);
+	border-bottom-color: #E2E2E2;
+	color: #3D3D3D;
+}
+
+switch:active {
+	background-image: linear-gradient(#DFDFDF, #EFEFEF);
+	border: 0;
+	border-top: 2px solid #FCFCFC;
+	color: #383838;
+}
+
+switch.on {
+	background-image: linear-gradient(#E6E6E6, #F6F6F6);
+	border: 0;
+	border-top: 2px solid #FCFCFC;
+	border-radius: 6px;
+	background-clip: padding-box;
+	box-shadow: 0 0 0 1px #D0D0D0;
+	color: #3B3B3B;
+	cursor: pointer;
+	display:inline-block;
+	font-family: "Open Sans";
+	font-size: 14px;
+	margin: 6px 0;
+	padding: 1px 8px 2px 8px;
+	text-align: center;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+}
+
+switch.on:hover {
+	background-image: linear-gradient(#DFDFDF, #EFEFEF);
+	border-top-color: #F6F6F6;
+	color: #383838;
+
+}

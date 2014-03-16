@@ -165,9 +165,6 @@ function main() {
 }
 
 var filer = new Filer();
-filer.read("/Test.txt", function(text) {
-	console.log(text);
-});
 
 /*START GAME*/
 var then = Date.now();

@@ -33,5 +33,16 @@ Filer.prototype.include = function(src, id) {
 	var parent = document.getElementById(id);
 	this.read(src, function(content) {
 		parent.innerHTML = content;
+		if (typeof refresh === "function") {
+			refresh();
+		}
 	});
+}
+
+/* Refresh methods are performed every time new content is switched in */
+var refreshMethods = new Array;
+function refresh() {
+	for (var i = 0; i < refreshMethods.length; i++) {
+		refreshMethods[i]();
+	}
 }

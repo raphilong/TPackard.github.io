@@ -143,3 +143,11 @@ canvas {
 	user-select: none;
 	-webkit-touch-callout: none;
 }
+
+.x {
+	position: fixed;
+	color: #FFFFFF;
+	font-size: 40px;
+	float: right;
+	right: 25px;
+}

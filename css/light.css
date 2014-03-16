@@ -99,7 +99,7 @@ a.content {
 	text-decoration:none;
 }
 
-a.content:link, a.content:visited {
+a.content:link, a.content:visited, a.content {
 	color:#0090FF;
 	background-color: #EEEEEE;
 	border: 2px solid #EEEEEE;
