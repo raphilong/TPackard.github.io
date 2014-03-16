@@ -27,14 +27,29 @@ submenu li a {
 	float: left;
 	margin-left: -1px;
 	color: #0090FF;
+	-o-transition: 0.5s;
+	-ms-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
 }
 
 submenu li a:hover {
 	background: #F0F2F4;
 	color: #0090FF;
+	-o-transition: 0.1s;
+	-ms-transition: 0.1s;
+	-moz-transition: 0.1s;
+	-webkit-transition: 0.1s;
+	transition: 0.1s;
 }
 
 submenu li a.selected, submenu li a:active {
 	background: #0090FF;
 	color: #FFFFFF;
+	-o-transition: 0.5s;
+	-ms-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
 }

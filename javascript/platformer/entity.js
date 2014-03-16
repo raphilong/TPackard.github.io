@@ -39,7 +39,7 @@ function Entity(imgSrc, x, y, speed, width, height, platforms, numFrames, numAni
     this.respawnY = this.y;
     this.score = 0;
     this.lastShot = 0;
-    this.maxHealth = 5;
+    this.maxHealth = health;
     this.lastHurt = 0;
     this.lastFrameSwitch = Date.now();
     this.frameWait = 64;

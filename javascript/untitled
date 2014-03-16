@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
-		<title>Platformer | Tyler Packard</title>
-		<meta name="description" content="Tyler Packard's personal website. This is a simple JavaScript game that he wrote.">
+		<title>Code | Tyler Packard</title>
+		<meta name="description" content="Tyler Packard's personal website. This page is about the programs he has coded.">
 		<meta name="keywords" content="Tyler, Packard, Javascript">
 		<meta name="news_keywords" content="Tyler, Packard, Javascript">
 		<meta name="author" content="Tyler Packard">
@@ -12,7 +12,6 @@
 		<script src="/js/analytics.js"></script>
 		<script src="/js/setCSS.js"></script>
 		<noscript><link href="/css/light.css" rel="stylesheet" type="text/css"></noscript>
-		<link href="/javascript/javascript.css" rel="stylesheet" type="text/css">
 		<link href="/css/menu.css" rel="stylesheet" type="text/css">
 		<script src="/js/filer.js"></script>
 		<script src="/js/includes.js"></script>
@@ -25,16 +24,16 @@
 		<submenu>
 			<ul id="submenu_ul" style="margin-left: -100px">
 				<li><a href="/java">Java</a></li>
-				<li><a href="/javascript" class="selected">JavaScript</a></li>
+				<li><a class="selected">JavaScript</a></li>
 			</ul>
 		</submenu>
-		<script src="platformer.js"></script>
         <div class="content">
-        	<br>
-           	<h2>Controls</h2>
-           	Use the arrow keys or WASD to move and jump, and press the spacebar to shoot. Press P to pause/unpause.
-           	<h2>Objective</h2>
-           	What is an objective?
+        	<div class="article-stub">
+        		<h2>Platformer</h2>
+        		My first JavaScript game - a basic platformer.
+        		<br>
+        		<a href="platformer" class="content">Play</a><span class="unimportant">&nbsp;&nbsp;Last update - Yesterday</span>
+        	</div>
         </div>
         
 		<footer id="footer"><script>makeFooter();</script></footer>

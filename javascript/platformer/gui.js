@@ -1,3 +1,4 @@
+/*STATUS BAR*/
 function StatusBar(imageSrc, x, y, width, height) {
 	this.image = new Image();
 	this.image.src = imageSrc + imgExt + ".png";

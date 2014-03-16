@@ -1,20 +1,6 @@
-/*CANVAS*/
-var canvas = document.getElementById("canvas");
-canvas.width = 800 * DPI; // Multiplied by DPI for retina displays
-canvas.height = 480 * DPI;
-canvas.style.width = "800px";
-canvas.style.height = "480px";
-var ctx = canvas.getContext("2d");
-
-
-/*LOAD FONTS*/
-ctx.font = String(128 * DPI) + "px Open Sans Bold";
-
-
 /*GAME FUNCTIONS AND OBJECTS*/
-var cookies = new Cookies();
-if (!cookies.contains("highscore")) {
-	cookies.set("highscore", 0, Infinity);
+if (!localStorage.getItem("highscore")) {
+	localStorage.setItem("highscore", 0);
 }
 
 var scrollX = 0;
@@ -69,7 +55,7 @@ function button(direction, state) {
 
 var entities = new Array();
 var platforms = new Array();
-var player = new Player(480, 250, 140, platforms);
+var player = new Player(480, 250);
 entities.push(player);
 
 var healthbar = new StatusBar("healthbar", 380, 25, 41, 6);
@@ -104,35 +90,59 @@ function scroll() {
     if (player.alive) {
     	var prevScrollX = scrollX;
 		scrollX = Math.round(player.getX() - canvas.width / (2 * DPI));
-		if (scrollX < 0) scrollX = 0;
-		if (scrollX > worldWidth - canvas.width / DPI) scrollX = worldWidth - canvas.width / DPI;
+		if (scrollX < 0) {
+			scrollX = 0;
+		}
+		if (scrollX > worldWidth - canvas.width / DPI) {
+			scrollX = worldWidth - canvas.width / DPI;
+		}
 		// Smooth scrolling! (Most of the time)
-		if (scrollX - prevScrollX > 3 && !player.moving) scrollX = prevScrollX + 3;
-		if (scrollX - prevScrollX < -3 && !player.moving) scrollX = prevScrollX - 3;
+		if (scrollX - prevScrollX > 3 && !player.moving) {
+			scrollX = prevScrollX + 3;
+		}
+		if (scrollX - prevScrollX < -3 && !player.moving) {
+			scrollX = prevScrollX - 3;
+		}
 
 		var prevScrollY = scrollY;
 		scrollY = Math.round(player.getY() - canvas.height / (2 * DPI));
-		if (scrollY < 0) scrollY = 0;
-		if (scrollY > worldHeight - canvas.height / DPI) scrollY = worldHeight - canvas.height / DPI;
-		if (scrollY - prevScrollY > 3 && !player.moving) scrollY = prevScrollY + 3;
-		if (scrollY - prevScrollY < -3 && !player.moving) scrollY = prevScrollY - 3;
+		if (scrollY < 0) {
+			scrollY = 0;
+		}
+		if (scrollY > worldHeight - canvas.height / DPI) {
+			scrollY = worldHeight - canvas.height / DPI;
+		}
+		if (scrollY - prevScrollY > 3 && !player.moving) {
+			scrollY = prevScrollY + 3;
+		}
+		if (scrollY - prevScrollY < -3 && !player.moving) {
+			scrollY = prevScrollY - 3;
+		}
     }
 }
 
 function paint() {
     ctx.fillStyle = "#EEEEF2";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    platforms.forEach(function(platform) {platform.draw(ctx)});
-    entities.forEach(function(entity) {entity.draw(ctx)});
+    platforms.forEach(function(platform) {
+    	platform.draw(ctx)
+    });
+    entities.forEach(function(entity) {
+    	entity.draw(ctx)
+    });
     healthbar.draw(ctx);
 
-    if (cookies.get("highscore") < player.score) cookies.set("highscore", player.score, Infinity);
+    if (localStorage.getItem("highscore") < player.score) localStorage.setItem("highscore", player.score);
     ctx.fillStyle = "#444450";
     ctx.font = String(12 * DPI) + "pt Open Sans";
     ctx.fillText("Score: " + player.score, 24 * DPI, 32 * DPI);
-    ctx.fillText("Highscore: " + cookies.get("highscore"), 24 * DPI, 64 * DPI);
+    ctx.fillText("Highscore: " + localStorage.getItem("highscore"), 24 * DPI, 64 * DPI);
     ctx.font = String(8 * DPI) + "pt Open Sans";
     ctx.fillText("HEALTH", 380 * DPI, 50 * DPI);
+
+    for (var i = 0; i < entities.length; i++) {
+        	entities[i].animate();
+    }
 }
 
 function main() {
@@ -143,11 +153,8 @@ function main() {
     	update(delta / 1000);
         scroll();
         paint();
-    
-        for (var i = 0; i < entities.length; i++) {
-        	entities[i].animate();
-        }
 
+        // Spawns new AI randomly
         if (Math.random() < 0.01 && entities.length < 25) {
         	entities.push(new AI("AI", 480, 174, 200, 13, 32, platforms, 6));
         }
@@ -156,6 +163,11 @@ function main() {
     then = now;
     setTimeout(main, 1);
 }
+
+var filer = new Filer();
+filer.read("/Test.txt", function(text) {
+	console.log(text);
+});
 
 /*START GAME*/
 var then = Date.now();

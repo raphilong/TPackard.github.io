@@ -1,5 +1,5 @@
-function Player(x, y, speed, platforms, health) {
-    Entity.call(this, "Player", x, y, speed, 13, 36, platforms, 6, 1, health);
+function Player(x, y, speed, health) {
+    Entity.call(this, "Player", x, y, 140, 13, 36, platforms, 6, 1, 3);
 }
 
 Player.prototype = new Entity;

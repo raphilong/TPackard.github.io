@@ -1,4 +1,4 @@
-/*CREATE HTML ELEMENTS*/
+// Insert HTML
 document.write("<br>");
 document.write("<center>");
 document.write("<canvas id=\"canvas\"><\/canvas>");
@@ -11,13 +11,60 @@ document.write("<a ontouchstart=\"button(SPACE, true);\" ontouchend=\"button(SPA
 document.write("<\/div>");
 document.write("<\/center>");
 
+/*CONSTANTS*/
+// Directions
+const RIGHT = "right";
+const LEFT = "left";
+const UP = "up";
+const DOWN = "down";
+
+// Keys
+const SPACE = 32;
+const UP_ARROW = 38;
+const DOWN_ARROW = 40;
+const LEFT_ARROW = 37;
+const RIGHT_ARROW = 39;
+const W = 87;
+const A = 65;
+const S = 83;
+const D = 68;
+const P = 80;
+
+/*SETUP*/
+var DPI = window.devicePixelRatio;
+if (DPI != 2) DPI = 1;
+var imgExt = "";
+if (DPI == 2) imgExt = "@2x";
+
+// Detect touch
+var touch = false;
+if ("ontouchstart" in window) { 
+	touch = true;
+}
+
+// Set up canvas
+var canvas = document.getElementById("canvas");
+canvas.width = 800 * DPI; // Multiplied by DPI for retina and 4k displays
+canvas.height = 480 * DPI;
+canvas.style.width = "800px";
+canvas.style.height = "480px";
+var ctx = canvas.getContext("2d");
+
+// Preload fonts
+ctx.font = String(128 * DPI) + "px Open Sans Bold";
+
 /*IMPORT SCRIPTS*/
-document.write("<sc" + "ript src=\"\/javascript\/cookies.js\"><\/sc" + "ript>");
-document.write("<sc" + "ript src=\"constants.js\"><\/sc" + "ript>");
-document.write("<sc" + "ript src=\"entity.js\"><\/sc" + "ript>");
-document.write("<sc" + "ript src=\"player.js\"><\/sc" + "ript>");
-document.write("<sc" + "ript src=\"platform.js\"><\/sc" + "ript>");
-document.write("<sc" + "ript src=\"npc.js\"><\/sc" + "ript>");
-document.write("<sc" + "ript src=\"weapon.js\"><\/sc" + "ript>");
-document.write("<sc" + "ript src=\"gui.js\"><\/sc" + "ript>");
-document.write("<sc" + "ript src=\"game.js\"><\/sc" + "ript>");
+document.import = function (src) {
+	var script = document.createElement("script");
+	script.src = src + ".js";
+	document.body.appendChild(script);
+}
+
+document.import("\/js\/filer");
+document.import("entity");
+document.import("player");
+document.import("platform");
+document.import("npc");
+document.import("weapon");
+document.import("gui");
+document.import("game");

@@ -12,27 +12,23 @@
 		<script src="/js/analytics.js"></script>
 		<script src="/js/setCSS.js"></script>
 		<noscript><link href="/css/light.css" rel="stylesheet" type="text/css"></noscript>
+		<script src="/js/filer.js"></script>
+		<script src="/js/includes.js"></script>
     </head>
     
     <body>
-		<div>
-			<header>TYLER<span class="Thin">PACKARD</span></header>
-			<center><subheader id="subheader">THIS WEBSITE RELIES ON JAVASCRIPT TO WORK PROPERLY. PLEASE ENABLE IT OR UPDATE TO A <a href="http://www.mozilla.org/en-US/firefox/new/" class="link">MODERN BROWSER</a>.</subheader></center>
-			<script src="/js/subheader.js"></script>
-		</div>
-		<nav>
-			<a href="/">Home</a>
-			<a href="/java">Code</a>
-			<a href="/pixels">Pixels</a>
-		</nav>
+		<div id="header"><script>makeHeader();</script></div>
+		<nav id="nav"><script>makeNav();</script></nav>
+
         <div class="content">
         	<br>
         	<h2>Privacy Policy</h2>
         	This website uses Google Analytics to track pageviews among other things. The use of this service is not malicious and does not and cannot harm you in any way.
         	<br><br>
         	<h2>Cookie Policy</h2>
-        	This website uses cookies on some javascript applications, mainly for storing game data such as highscores. The cookies on this site are not used in any bad ways, and cannot harm you or your computer.
+        	This website does not use cookies anymore, although your browser may still store a cookie storing your highscore for my JavaScript platformer
         </div>
-        <footer>&copy; 2014 Tyler Packard. <a href="/policies/privacy">Privacy Policy</a></footer>
+
+		<footer id="footer"><script>makeFooter();</script></footer>
     </body>
 </html>
